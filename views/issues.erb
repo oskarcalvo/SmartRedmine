@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+    <%= js :application %>
+    <%= css :application %>
+  
+
+</head>
+<body>
+<div class="row" style="height: 50px;">
+
+
+  <div class="small-12 columns">
+    <div class="icon-bar five-up" role="navigation"style="    position: fixed;
+    z-index: 99;" >
+      <a class="item">
+        <img src="../assets/img/images/fi-home.svg" >
+        <label>Home</label>
+      </a>
+      <a class="item">
+        <img src="../assets/img/images/fi-bookmark.svg" >
+        <label>Bookmark</label>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 150px;">    
+
+
+</div>
+<% # raise @members.inspect %>
+  
+  <div class="row">  
+    <div class=" columns" style="width:25%">
+      Asunto
+    </div>
+    <div class=" columns" style="width:12%">
+      Tipo
+    </div>
+    <div class=" columns" style="width:12%">
+      Estado
+    </div>
+    <div class=" columns" style="width:12%">
+      Prioridad
+    </div>
+    <div class=" columns" style="width:15%">
+      Asignado a
+    </div>
+    <div class=" columns" style="width:12%">
+      Fechas
+    </div>
+    <div class=" columns" style="width:5%">
+    Acción
+    </div>   
+  </div>
+
+   
+  <% for @issue in @issues  %>
+    <div class="row" data-issue-id="<%= @issue['id'] %>" style="margin-top: 20px;"> 
+      <div class=" columns" style="width:25%">
+        <a target="_blank" href="<%= @path %>issues/<%= @issue['id'] %>"> 
+          <%= @issue['id'] %>
+        </a>
+        <span  data-tooltip aria-haspopup="true" class="has-tip" title="<%= @issue['description'] %>" >
+          <%= @issue['subject'] %>
+        </span>
+      </div>
+      <div class=" columns" style="width:12%"> 
+        <span data-tracker-id="<%= @issue['tracker']['id'] %>"> 
+          <%= @issue['tracker']['name'] %>
+        </span>
+      </div>
+      <div class=" columns" style="width:12%">
+        <span data-status-id="<%= @issue['status']['id'] %>">
+          <%= @issue['status']['name'] %>  
+        </span>
+      </div>
+      <div class=" columns" style="width:12%">
+        <span data-priority-id="<%= @issue['priority']['id'] %>">
+          <%= @issue['priority']['name'] %>
+        </span>
+      </div>
+      <div class=" columns" style="width:15%">
+        <span data-assigned_to_id="<%= @issue['assigned_to']['id'] %>">
+          <%= @issue['assigned_to']['name'] %>
+        </span>
+      </div>
+      <div class=" columns" style="width:12%">
+        <%= @issue['start_date'] %><br><%= @issue['updated_on'] %>
+      </div>
+      <div class=" columns" style="width:5%">
+        <i class="saveissue step fi-pencil size-20" data-id="<%= @issue['id'] %>"></i>
+        <i class="saveissue step fi-plus size-20" data-id="<%= @issue['id'] %>"></i>
+      </div> 
+    </div>
+  <% end %>
+
+  <div class="hidden row">
+    <form action="/wadus">
+      <div class="" style="width:12%">
+        <label>Tipo:</label>
+        <span>
+          <%= select('tracker', @trackers, @issue['tracker']['id'] ) %> 
+        </span>
+      </div>
+      <div class="" style="width:12%">
+        <label>Estado:</label>
+        <span>
+          <%= @issue['status']['name'] %> <br><%= @issue['status']['id'] %>
+        </span>
+      </div>
+      <div class="" style="width:12%">
+        <label>Prioridad:</label>
+        <span>
+          <%= select('prioriti_' +  @issue['id'].to_s , @priorities, @issue['priority']['id']) %> 
+        </span>
+      </div>
+      <div class="" style="width:12%">
+        <label>Asignado a:</label>
+        <span>
+          <%= select('member', @members,@issue['assigned_to']['id']) %> 
+        </span>
+      </div>
+
+    </form>
+    
+
+
+  </div>
+
+<!--
+
+    <div class="small-14 columns"> 
+<table>
+<thead>
+  <tr>
+    <th>Asunto</th>
+    <th>Tipo</th>
+    <th>Estado</th>
+    <th>Prioridad</th>
+    <th>Asignado a</th>
+    <th>fechas comienzo/fin</th>
+    <th>Acción</th>
+  </tr>
+</thead>
+<tbody>
+
+  <% for @issue in @issues  %>
+  <tr>
+    <td>
+      <a target="_blank" href="<%= @path %>issues/<%= @issue['id'] %>"> 
+        <%= @issue['id'] %>
+      </a>
+      <span  data-tooltip aria-haspopup="true" class="has-tip" title="<%= @issue['description'] %>" >
+        <%= @issue['subject'] %>
+      </span>
+    </td>
+    <td> <%= select('tracker', @trackers, @issue['tracker']['id']) %> </td>
+    <td><%= @issue['status']['name'] %> <br><%= @issue['status']['id'] %> </td>
+    <td><%= select('prioriti_' +  @issue['id'].to_s , @priorities, @issue['priority']['id']) %> </td>
+    <td><%= select('member', @members,@issue['assigned_to']['id']) %> </td>
+    <td><%= @issue['start_date'] %><br><%= @issue['updated_on'] %></td>
+    <td><i class="saveissue step fi-save size-20" data-id="<%= @issue['id'] %>"></i></td>
+  <tr>    
+  <% end %>
+
+</tbody>
+</table>
+</div>
+
+</div>
+-->
+</body>
+</html>
