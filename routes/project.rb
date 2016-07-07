@@ -5,12 +5,20 @@ class SmartRedmine < Sinatra::Base
     #validamos si el usuario se ha autentificado correctamente.
     require_logged_in
   
-    binding.pry
+    #binding.pry
     path = @config['config']['url'] + 'issues.json?project_id=' + params[:id] + '&key=' + session[:user]['api_key']
     response = RedmineIssues.new.getissues path
+
+    if response && response['total_count'] == 0
     
-    if !response.nil?
+      @sin_incidencias = response['total_count']
+      erb :'../views/issues'
+    end
+
+    
+    if response 
       @issues = response['issues']
+      
     end
     
     pathmembers = @config['config']['url'] + 'projects/' + params[:id] + '/memberships.json'
@@ -21,26 +29,26 @@ class SmartRedmine < Sinatra::Base
   
     pathpriorities = @config['config']['url'] + 'enumerations/issue_priorities.json'
     responsepriorities = RedmineIssues.new.getissuepriorities pathpriorities, session
-  
-  
-  
-    if !responsepriorities.nil?
+    if responsepriorities
       @priorities =  cleanhash ( responsepriorities['issue_priorities'])
-    
     end
   
     pathtracker = @config['config']['url']  + 'projects/' + params[:id] + '.json?include=trackers'
     responsetrackers = RedmineIssues.new.getissuedata pathtracker, session
-  
-    if !responsetrackers.nil?
+    if responsetrackers
       @trackers = cleanhash ( responsetrackers['project']['trackers'])
-    #   @trackers = responsetrackers['project']['trackers'].inject {|sum, elem| sum[elem['id']] = elem['name']; sum}
+    end
+
+    pathstatus = @config['config']['url'] + '/issue_statuses.json'
+    responsestatus = RedmineIssues.new.getissuestatus pathstatus, session
+    if responsestatus
+      @status = cleanhash ( responsestatus['issue_statuses'])
     end
   
     #Pasamos la variable con la url de redmine.
     @path = @config['config']['url']
     
-    binding.pry
+    #binding.pry
     
     erb :'../views/issues'
     

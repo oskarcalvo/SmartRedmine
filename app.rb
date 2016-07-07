@@ -19,7 +19,7 @@ require_relative 'helpers/init'
 
 class SmartRedmine < Sinatra::Base
   helpers Sinatra::CleanHash
-  #helpers Sinatra::HtmlHelpers
+  helpers Sinatra::Ahah
   
   ROOT = File.dirname(__FILE__)
 

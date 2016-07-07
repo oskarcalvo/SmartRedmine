@@ -8,4 +8,4 @@ gem 'sinatra-assetpack'
 gem 'rerun'
 gem 'redcarpet'
 #gem 'sprockets-helpers'
-
+gem 'awesome_print'
