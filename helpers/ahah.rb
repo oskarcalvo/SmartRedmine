@@ -3,9 +3,7 @@ require 'sinatra/base'
 module Sinatra
   module Ahah
     def select(name, options_list, selected_value)
-      
-      binding.pry
-      
+
       html = ''
       options_list.each do |key, value|
         
