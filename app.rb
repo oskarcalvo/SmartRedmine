@@ -7,27 +7,32 @@ require 'json'
 require 'sinatra/assetpack'
 require 'redcarpet'
 require 'rerun'
- 
+
 
 
 require_relative 'libs/redmine_user.rb'
 require_relative 'libs/redmine_issues.rb'
 require_relative 'libs/redmine_journals.rb'
+require_relative 'helpers/init'
 
 
 
 class SmartRedmine < Sinatra::Base
+  helpers Sinatra::CleanHash
+  #helpers Sinatra::HtmlHelpers
+  
+  ROOT = File.dirname(__FILE__)
 
+  configure do
 
-
-  configure do 
+    set :ROOT, File.dirname(__FILE__)
 
     set :bind, '0.0.0.0'
-  
+
     enable :sessions
 
     set :static_cache_control, [:public, max_age: 60 * 60 * 24 * 365]
-    
+
 
       register Sinatra::AssetPack
       assets do
@@ -38,29 +43,30 @@ class SmartRedmine < Sinatra::Base
           '/js/easyredmine.js',
           '/js/vendor/*.js'
         ]
-        
+
         serve '/css', :from => 'asset/css'
         css :application, ['/css/*.css']
       end
-    
-    
-    
+
+
+
   end
 
-  #before do
-  #  @config = YAML.load_file("conf/config.yaml")
-  #end
+  before do
+    @config = YAML.load_file("conf/config.yaml")
+  end
 
   def require_logged_in
+   # binding.pry
     redirect('login') unless is_authenticated?
   end
 
   def is_authenticated?
-    return !!session[:user_id]
+    #binding.pry
+    return !!session[:session_id]
   end
 
 
 end
 
-require_relative 'helpers/init'
 require_relative 'routes/init'
