@@ -7,6 +7,7 @@ require 'json'
 require 'sinatra/assetpack'
 require 'redcarpet'
 require 'rerun'
+require "sinatra/cookies"
 
 
 
