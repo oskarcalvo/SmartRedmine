@@ -4,6 +4,11 @@ class SmartRedmine < Sinatra::Base
     #validamos si el usuario se ha autentificado correctamente.
     require_logged_in
     # binding.pry
+    if is_not_authenticated?
+      redirect('login')
+      return
+    end
+
 
     response = RedmineUser.new.getprojects(session[:user]['api_key'])
 
