@@ -21,7 +21,7 @@ require_relative 'helpers/init'
 class SmartRedmine < Sinatra::Base
   helpers Sinatra::CleanHash
   helpers Sinatra::Ahah
-  
+
   ROOT = File.dirname(__FILE__)
 
   configure do
@@ -59,15 +59,14 @@ class SmartRedmine < Sinatra::Base
 
   def require_logged_in
    # binding.pry
-    redirect('login') unless is_authenticated?
+    redirect('login') if is_not_authenticated?
   end
 
-  def is_authenticated?
+  def is_not_authenticated?
     #binding.pry
-    return !!session[:session_id]
+    return session[:user].nil?
   end
 
 
 end
-
 require_relative 'routes/init'
