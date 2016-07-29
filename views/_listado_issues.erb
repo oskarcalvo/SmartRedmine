@@ -14,13 +14,13 @@
   </div>
 </div>
 
-<div class="row" style="margin-top: 150px;">    
+<div class="row" style="margin-top: 150px;">
 
 
 </div>
 <% # raise @members.inspect %>
-  
-  <div class="row">  
+
+  <div class="row">
     <div class=" columns" style="width:25%">
       Asunto
     </div>
@@ -41,38 +41,39 @@
     </div>
     <div class=" columns" style="width:5%">
     Acción
-    </div>   
+    </div>
   </div>
 
-   
+
   <% @issues.each do |issue|  %>
-    <div class="row" data-issue-id="<%= issue['id'] %>" style="margin-top: 20px;"> 
+    <div class="row" data-issue-id="<%= issue['id'] %>" style="margin-top: 20px;">
       <div class=" columns" style="width:25%">
-        <a target="_blank" href="<%= @path %>issues/<%= issue['id'] %>"> 
+        <a target="_blank" href="<%= @path %>issues/<%= issue['id'] %>">
           <%= issue['id'] %>
         </a>
         <span  data-tooltip aria-haspopup="true" class="has-tip" title="<%= issue['description'] %>" >
           <%= issue['subject'] %>
         </span>
       </div>
-      <div class=" columns" style="width:12%"> 
-        <span data-tracker-id="<%= issue['tracker']['id'] %>"> 
-          <%= issue['tracker']['name'] %>
+      <div class=" columns" style="width:12%">
+        <span data-tracker-id="<%= issue['tracker']['id'] %>">
+          <%= select('tracker', @trackers, issue['tracker']['id'] ) %>
         </span>
       </div>
       <div class=" columns" style="width:12%">
         <span data-status-id="<%= issue['status']['id'] %>">
-          <%= issue['status']['name'] %>  
+          <%= select('estado', @status, issue['status']['id']) %>
         </span>
       </div>
       <div class=" columns" style="width:12%">
         <span data-priority-id="<%= issue['priority']['id'] %>">
-          <%= issue['priority']['name'] %>
+          <%= select('prioriti_' +  issue['id'].to_s , @priorities, issue['priority']['id']) %>
         </span>
       </div>
       <div class=" columns" style="width:15%">
         <span data-assigned_to_id="<%= issue['assigned_to']['id'] if issue['assigned_to']  %>">
-          <%= issue['assigned_to']['name'] if issue['assigned_to'] %>
+          <% assigned_to_id = !(issue['assigned_to'] == nil) ? issue['assigned_to']['id'] : '' %>
+          <%= select('member', @members, assigned_to_id ) %>
         </span>
       </div>
       <div class=" columns" style="width:12%">
@@ -81,39 +82,8 @@
       <div class=" columns" style="width:5%">
         <i class="saveissue step fi-pencil size-20" data-id="<%= issue['id'] %>"></i>
         <i class="saveissue step fi-plus size-20" data-id="<%= issue['id'] %>"></i>
-      </div> 
+      </div>
     </div>
-    
-    <div class="hidden row">
-      <form action="/wadus">
-        <div class="" style="width:12%">
-          <label>Tipo:</label>
-          <span>
-            <%= select('tracker', @trackers, issue['tracker']['id'] ) %> 
-          </span>
-        </div>
-        <div class="" style="width:12%">
-          <label>Estado:</label>
-          <span>
-            <%= select('estado', @status, issue['status']['id']) %>
-          </span>
-        </div>
-        <div class="" style="width:12%">
-          <label>Prioridad:</label>
-          <span>
-            <%= select('prioriti_' +  issue['id'].to_s , @priorities, issue['priority']['id']) %> 
-          </span>
-        </div>
-        <div class="" style="width:12%">
-          <label>Asignado a:</label>
-          <span>
-            <% assigned_to_id = !(issue['assigned_to'] == nil) ? issue['assigned_to']['id'] : '' %>
-            <%= select('member', @members, assigned_to_id ) %> 
-          </span>
-        </div>
-      </form>
-    </div>     
-    
   <% end %>
 
 
