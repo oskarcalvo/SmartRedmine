@@ -10,7 +10,7 @@ class SmartRedmine < Sinatra::Base
     end
 
 
-    response = RedmineUser.new.getprojects(session[:user]['api_key'])
+    response = RedmineUser.new.get_projects(session[:user]['api_key'])
 
     if !response.nil?
       @projects = response

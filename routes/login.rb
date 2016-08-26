@@ -6,7 +6,7 @@ class SmartRedmine < Sinatra::Base
 
   post '/loginvalidate' do
 
-    response = RedmineUser.new.getuser(params[:name],params[:password])
+    response = RedmineUser.new.get_user(params[:name],params[:password])
     #Si response no devuelve el objeto del usuario de redmine volvemos a la página de login
 
     if !response.nil?

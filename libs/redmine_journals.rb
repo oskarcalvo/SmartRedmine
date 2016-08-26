@@ -8,7 +8,7 @@ class RedmineJournals
 
     # si tenemos comentarios los satinizamos
     if journal['notes']
-      journal['notes'] = markdown2html(journal['notes'])
+      journal['notes'] = markdown_2_html(journal['notes'])
     end
 
     # journal['details'].each do |action|
@@ -23,10 +23,10 @@ class RedmineJournals
     #     when 'due_date'
 
     #     when 'fixed_version_id'
-          
+
     #     when 'done_ratio'
 
-    #   end    
+    #   end
 
     #   # puts action['name']
 
@@ -35,18 +35,18 @@ class RedmineJournals
 
     # binding.pry
     # puts journal
-    
+
     return journal
   end
 
 
-  def markdown2html(text)
+  def markdown_2_html(text)
 
     options = {
         filter_html:     true,
-        hard_wrap:       true, 
+        hard_wrap:       true,
         link_attributes: { rel: 'nofollow', target: "_blank" },
-        space_after_headers: true, 
+        space_after_headers: true,
         fenced_code_blocks: true
       }
 
@@ -64,8 +64,8 @@ class RedmineJournals
     return markdown
   end
 
-  def  status_id (value) 
-  end 
+  def  status_id (value)
+  end
 
   def assigned_to_id (value)
   end

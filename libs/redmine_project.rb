@@ -3,7 +3,7 @@ def RedmineProject
     @config = YAML.load_file("./conf/config.yaml")
   end
 
-  def getissuesbyprojectid() 
-  
+  def get_issues_by_project_id() 
+
   end
 end

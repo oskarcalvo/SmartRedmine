@@ -13,7 +13,7 @@ class SmartRedmine < Sinatra::Base
     binding.pry
 
     path = @config['config']['url'] + 'issues.json?project_id=' + params[:id] + '&key=' + session[:user]['api_key']
-    response = RedmineIssues.new.getissues path
+    response = RedmineIssues.new.get_issues path
 
     if response && response['total_count'] == 0
 
@@ -28,13 +28,13 @@ class SmartRedmine < Sinatra::Base
     end
 
     pathmembers = @config['config']['url'] + 'projects/' + params[:id] + '/memberships.json'
-    responsemembers = RedmineIssues.new.getprojectusers pathmembers,session
+    responsemembers = RedmineIssues.new.get_project_users pathmembers,session
     if !responsemembers.nil?
       @members = responsemembers['memberships'].inject({}) {|sum, elem| sum[elem['user']['id']] = elem['user']['name']; sum}
     end
 
     pathpriorities = @config['config']['url'] + 'enumerations/issue_priorities.json'
-    responsepriorities = RedmineIssues.new.getissuepriorities pathpriorities, session
+    responsepriorities = RedmineIssues.new.get_issue_priorities pathpriorities, session
     if responsepriorities
       @priorities =  cleanhash ( responsepriorities['issue_priorities'])
     end
@@ -46,7 +46,7 @@ class SmartRedmine < Sinatra::Base
     end
 
     pathstatus = @config['config']['url'] + '/issue_statuses.json'
-    responsestatus = RedmineIssues.new.getissuestatus pathstatus, session
+    responsestatus = RedmineIssues.new.get_issuestatus pathstatus, session
     if responsestatus
       @status = cleanhash ( responsestatus['issue_statuses'])
     end

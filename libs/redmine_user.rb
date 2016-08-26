@@ -7,17 +7,12 @@ class RedmineUser
 
   end
 
-  def getuser (user, pass)
+  def get_user (user, pass)
     path = @config["config"]["url"] + USEROBJECT
 
-    uri = URI.parse(path)
-    req = Net::HTTP::Get.new(uri)
-    response = nil
-    req.basic_auth user, pass
-    res = Net::HTTP.start(uri.hostname, uri.port) {|http|	  response = http.request(req)	}
-    #binding.pry
+    response = RedmineConnect2API.new.connect(path, {user: user, pass: pass })
 
-    data = nil
+    #data = nil
 
     case response
       when  Net::HTTPSuccess then
@@ -29,16 +24,13 @@ class RedmineUser
 
   end
 
-  def getprojects (apikey)
+  def get_projects (apikey)
     path = @config['config']['url'] + USERPROJECTS + '&key=' + apikey
 
-    uri = URI.parse(path)
-    req = Net::HTTP::Get.new(uri)
-    response = nil
-    res = Net::HTTP.start(uri.hostname, uri.port) {|http|	  response = http.request(req)	}
+    response = RedmineConnect2API.new.connect(path)
     #binding.pry
 
-    projects = nil
+    #projects = nil
 
     case response
     when  Net::HTTPSuccess then

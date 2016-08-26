@@ -1,47 +1,41 @@
 class RedmineIssues
 
-  def getissues (path)
+  def get_issues (path)
 
-    uri = URI.parse(path)
-    req = Net::HTTP::Get.new(uri)
-    response = nil
-    res = Net::HTTP.start(uri.hostname, uri.port) {|http|	  response = http.request(req)	}
-    #binding.pry
-    
-    
+
+    response = RedmineConnect2API.new.connect(path)
+
+
+
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
       return data
     else
       return nil
-    end   
-      
+    end
+
 
   end
-  
-  def getprojectusers(path, session)
 
-    uri = URI.parse(path)
-    req = Net::HTTP::Get.new(uri)
-    response = nil
-    req.basic_auth session[:loginname], session[:loginpass]
-    res = Net::HTTP.start(uri.hostname, uri.port) {|http|	  response = http.request(req)	}
+  def get_project_users(path, session)
+
+    response = RedmineConnect2API.new.connect(path, {user: session[:loginname], pass: session[:loginpass] })
     #binding.pry
-    
-    
+
+
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
       return data
     else
-      return nil 
-    end   
-  
+      return nil
+    end
+
   end
 
 
-  def getissuepriorities(path, session)
+  def get_issue_priorities(path, session)
 
     uri = URI.parse(path)
     req = Net::HTTP::Get.new(uri)
@@ -49,15 +43,15 @@ class RedmineIssues
     req.basic_auth session[:loginname], session[:loginpass]
     res = Net::HTTP.start(uri.hostname, uri.port) {|http|   response = http.request(req)  }
     #binding.pry
-    
-    
+
+
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
       return data
     else
-      return nil 
-    end   
+      return nil
+    end
 
   end
 
@@ -69,19 +63,19 @@ class RedmineIssues
     req.basic_auth session[:loginname], session[:loginpass]
     res = Net::HTTP.start(uri.hostname, uri.port) {|http|   response = http.request(req)  }
     #binding.pry
-    
-    
+
+
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
       return data
     else
-      return nil 
-    end   
+      return nil
+    end
 
   end
 
-  def getissuestatus(path, session)
+  def get_issuestatus(path, session)
 
     uri = URI.parse(path)
     req = Net::HTTP::Get.new(uri)
@@ -89,17 +83,17 @@ class RedmineIssues
     req.basic_auth session[:loginname], session[:loginpass]
     res = Net::HTTP.start(uri.hostname, uri.port) {|http|   response = http.request(req)  }
     #binding.pry
-    
-    
+
+
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
       return data
     else
-      return nil 
-    end   
+      return nil
+    end
 
-  end  
+  end
 
 
 end
