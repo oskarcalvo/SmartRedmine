@@ -28,13 +28,10 @@ class SmartRedmine < Sinatra::Base
   configure do
 
     set :ROOT, File.dirname(__FILE__)
-
     set :bind, '0.0.0.0'
-
     enable :sessions
-
     set :static_cache_control, [:public, max_age: 60 * 60 * 24 * 365]
-
+    enable :method_override
 
       register Sinatra::AssetPack
       assets do

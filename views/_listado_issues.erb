@@ -47,42 +47,48 @@
 
   <% @issues.each do |issue|  %>
     <div class="row" data-issue-id="<%= issue['id'] %>" style="margin-top: 20px;">
-      <div class=" columns" style="width:25%">
-        <a target="_blank" href="<%= @path %>issues/<%= issue['id'] %>">
-          <%= issue['id'] %>
-        </a>
-        <span  data-tooltip aria-haspopup="true" class="has-tip" title="<%= issue['description'] %>" >
-          <%= issue['subject'] %>
-        </span>
-      </div>
-      <div class=" columns" style="width:12%">
-        <span data-tracker-id="<%= issue['tracker']['id'] %>">
-          <%= select('tracker', @trackers, issue['tracker']['id'] ) %>
-        </span>
-      </div>
-      <div class=" columns" style="width:12%">
-        <span data-status-id="<%= issue['status']['id'] %>">
-          <%= select('estado', @status, issue['status']['id']) %>
-        </span>
-      </div>
-      <div class=" columns" style="width:12%">
-        <span data-priority-id="<%= issue['priority']['id'] %>">
-          <%= select('prioriti_' +  issue['id'].to_s , @priorities, issue['priority']['id']) %>
-        </span>
-      </div>
-      <div class=" columns" style="width:15%">
-        <span data-assigned_to_id="<%= issue['assigned_to']['id'] if issue['assigned_to']  %>">
-          <% assigned_to_id = !(issue['assigned_to'] == nil) ? issue['assigned_to']['id'] : '' %>
-          <%= select('member', @members, assigned_to_id ) %>
-        </span>
-      </div>
-      <div class=" columns" style="width:12%">
-        <%= issue['start_date'] %><br><%= issue['updated_on'] %>
-      </div>
-      <div class=" columns" style="width:5%">
-        <i class="saveissue step fi-pencil size-20" data-id="<%= issue['id'] %>"></i>
-        <i class="saveissue step fi-plus size-20" data-id="<%= issue['id'] %>"></i>
-      </div>
+      <form action="/issues/<%= issue['id'] %>" method="POST">
+        <input type="hidden" name="_method" value="put">
+        <div class=" columns" style="width:25%">
+          <input type="hidden" name="project_id" value="<%=issue['project']['id'] %>">
+          <a target="_blank" href="<%= @path %>issues/<%= issue['id'] %>">
+            <%= issue['id'] %>
+          </a>
+          <span  data-tooltip aria-haspopup="true" class="has-tip" title="<%= issue['description'] %>" >
+            <input type="text" name="subjetc" class="disabled" disabled="disabled" value="<%= issue['subject'] %>">
+          </span>
+        </div>
+        <div class=" columns" style="width:12%">
+          <span data-tracker-id="<%= issue['tracker']['id'] %>">
+            <%= select('tracker_id', @trackers, issue['tracker']['id'] ) %>
+          </span>
+        </div>
+        <div class=" columns" style="width:12%">
+          <span data-status-id="<%= issue['status']['id'] %>">
+            <%= select('status_id', @status, issue['status']['id']) %>
+          </span>
+        </div>
+        <div class=" columns" style="width:12%">
+          <span data-priority-id="<%= issue['priority']['id'] %>">
+            <%= select('priority_id' , @priorities, issue['priority']['id']) %>
+          </span>
+        </div>
+        <div class=" columns" style="width:15%">
+          <span data-assigned_to_id="<%= issue['assigned_to']['id'] if issue['assigned_to']  %>">
+            <% assigned_to_id = !(issue['assigned_to'] == nil) ? issue['assigned_to']['id'] : '' %>
+            <%= select('assigned_to_id', @members, assigned_to_id ) %>
+          </span>
+        </div>
+        <div class=" columns" style="width:12%">
+          Start: <input type="date" name="start_date" value="<%= issue['start_date'] %>">
+          End: <input type="date" name="due_date" value="<%= issue['due_date'] %>">
+        </div>
+        <div class=" columns" style="width:5%">
+          <i class="saveissue step fi-pencil size-20" data-id="<%= issue['id'] %>"></i>
+          <i class="saveissue step fi-plus size-20" data-id="<%= issue['id'] %>"></i>
+        </div>
+        <input type="submit" name="actualizar" value="Actualizar">
+      </form>
     </div>
   <% end %>
 

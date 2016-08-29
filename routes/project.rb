@@ -10,7 +10,7 @@ class SmartRedmine < Sinatra::Base
       return
     end
 
-    binding.pry
+    #binding.pry
 
     path = @config['config']['url'] + 'issues.json?project_id=' + params[:id] + '&key=' + session[:user]['api_key']
     response = RedmineIssues.new.get_issues path
@@ -24,7 +24,7 @@ class SmartRedmine < Sinatra::Base
 
     if response
       @issues = response['issues']
-
+      #binding.pry
     end
 
     pathmembers = @config['config']['url'] + 'projects/' + params[:id] + '/memberships.json'
@@ -40,20 +40,19 @@ class SmartRedmine < Sinatra::Base
     end
 
     pathtracker = @config['config']['url']  + 'projects/' + params[:id] + '.json?include=trackers'
-    responsetrackers = RedmineIssues.new.getissuedata pathtracker, session
+    responsetrackers = RedmineIssues.new.get_issue_data pathtracker, session
     if responsetrackers
       @trackers = cleanhash ( responsetrackers['project']['trackers'])
     end
 
     pathstatus = @config['config']['url'] + '/issue_statuses.json'
-    responsestatus = RedmineIssues.new.get_issuestatus pathstatus, session
+    responsestatus = RedmineIssues.new.get_issue_status pathstatus, session
     if responsestatus
       @status = cleanhash ( responsestatus['issue_statuses'])
     end
 
     #Pasamos la variable con la url de redmine.
     @path = @config['config']['url']
-
     #binding.pry
 
     erb :'../views/issues'

@@ -20,4 +20,23 @@ class RedmineConnect2API
 
   end
 
+
+  def put (path, args = {})
+    #binding.pry
+    uri = URI.parse(path)
+    req = Net::HTTP::Put.new(uri,  'Content-Type' => 'application/json' )
+    req.body = args.to_json
+    #req.set_form_data(args)
+
+    #binding.pry
+    response = nil
+
+    if args[:user] && args[:pass]
+      req.basic_auth args[:user], args[:pass]
+    end
+    #binding.pry
+    res = Net::HTTP.start(uri.hostname, uri.port)  {|http|	  response = http.request(req)	}
+
+  end
+
 end
