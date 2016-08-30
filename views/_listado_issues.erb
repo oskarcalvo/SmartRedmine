@@ -16,7 +16,9 @@
 
 <div class="row" style="margin-top: 150px;">
 
-
+<% if @message %>
+  <%= @message %>
+<% end %>
 </div>
 <% # raise @members.inspect %>
 
@@ -55,7 +57,8 @@
             <%= issue['id'] %>
           </a>
           <span  data-tooltip aria-haspopup="true" class="has-tip" title="<%= issue['description'] %>" >
-            <input type="text" name="subjetc" class="disabled" disabled="disabled" value="<%= issue['subject'] %>">
+            <input type="hidden" name="subjetc" class="disabled" value="<%= issue['subject'] %>">
+            <%= issue['subject'] %>
           </span>
         </div>
         <div class=" columns" style="width:12%">

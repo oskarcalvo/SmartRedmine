@@ -10,7 +10,9 @@ class SmartRedmine < Sinatra::Base
       return
     end
 
-    #binding.pry
+    if flash[:message_issue_updated]
+      @message = flash[:message_issue_updated]
+    end
 
     path = @config['config']['url'] + 'issues.json?project_id=' + params[:id] + '&key=' + session[:user]['api_key']
     response = RedmineIssues.new.get_issues path

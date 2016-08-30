@@ -8,7 +8,6 @@ class SmartRedmine < Sinatra::Base
 
   put '/issues/:id' do
 
-
     params.delete("_method")
     params.delete("captures")
     params.delete("splat")
@@ -22,8 +21,15 @@ class SmartRedmine < Sinatra::Base
     }
 
     response = RedmineIssues.new.put_issue(path, args)
-    binding.pry
-    
+
+    if response
+      flash[:message_issue_updated] = "Issue #{params[:subjetc]} has been updated."
+    else
+      flash[:message_issue_updated] = "Something go wrong with #{params[:subjetc]}, please contact with the administrator of the website."
+    end
+    #binding.pry
+
+    redirect '/project/' + params[:project_id]
   end
 
 

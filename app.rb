@@ -8,6 +8,7 @@ require 'sinatra/assetpack'
 require 'redcarpet'
 require 'rerun'
 require "sinatra/cookies"
+require "sinatra/flash"
 
 
 
@@ -30,6 +31,7 @@ class SmartRedmine < Sinatra::Base
     set :ROOT, File.dirname(__FILE__)
     set :bind, '0.0.0.0'
     enable :sessions
+    register Sinatra::Flash
     set :static_cache_control, [:public, max_age: 60 * 60 * 24 * 365]
     enable :method_override
 
