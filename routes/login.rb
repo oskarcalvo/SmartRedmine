@@ -16,7 +16,11 @@ class SmartRedmine < Sinatra::Base
       session[:loginname] = params[:name]
       session[:loginpass] = params[:password]
       session[:user] = response['user']
-     # binding.pry
+
+      if cookies['project_id']
+        redirect '/project/' + cookies[:project_id]
+      end
+
       redirect '/user'
     else
       redirect '/login'
@@ -25,6 +29,3 @@ class SmartRedmine < Sinatra::Base
   end
 
 end
-
-
-

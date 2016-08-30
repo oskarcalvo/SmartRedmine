@@ -10,6 +10,12 @@ class SmartRedmine < Sinatra::Base
       return
     end
 
+    if cookies[:project_id] != params[:id]
+       cookies[:project_id] = params[:id]
+    end
+
+    
+
     if flash[:message_issue_updated]
       @message = flash[:message_issue_updated]
     end
