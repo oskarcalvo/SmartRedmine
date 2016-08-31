@@ -2,17 +2,24 @@
 class SmartRedmine < Sinatra::Base
 
   get '/issues/:id' do
-
+    require_logged_in
 
   end
 
   put '/issues/:id' do
 
+    require_logged_in
+
     params.delete("_method")
     params.delete("captures")
     params.delete("splat")
     params.delete("actualizar")
-    #binding.pry
+    #params["start_date"] = params["start_date_submit"]
+    #params.delete("start_date_submit")
+    #params["due_date"] = params["due_date_submit"]
+    #params.delete("due_date_submit")
+    binding.pry
+
     path = @config['config']['url'] + 'issues/' + params[:id] + '.json'
     args = {
       issue:  params,
@@ -27,7 +34,6 @@ class SmartRedmine < Sinatra::Base
     else
       flash[:message_issue_updated] = "Something go wrong with #{params[:subjetc]}, please contact with the administrator of the website."
     end
-    #binding.pry
 
     redirect '/project/' + params[:project_id]
   end

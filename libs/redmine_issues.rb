@@ -75,7 +75,7 @@ class RedmineIssues
   def put_issue(path, args = {})
 
     response = RedmineConnect2API.new.put(path, args)
-
+    
     case response
     when  Net::HTTPSuccess then
       return true

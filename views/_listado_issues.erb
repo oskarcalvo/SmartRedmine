@@ -83,17 +83,27 @@
           </span>
         </div>
         <div class=" columns" style="width:12%">
-          Start: <input type="date" name="start_date" value="<%= issue['start_date'] %>">
-          End: <input type="date" name="due_date" value="<%= issue['due_date'] %>">
+          Start: <input type="date" class="issue_start_date" name="start_date" value="<%= issue['start_date'] %>">
+          End:   <input type="date" class="issue_due_date" name="due_date" value="<%= issue['due_date'] %>">
         </div>
         <div class=" columns" style="width:5%">
           <i class="saveissue step fi-pencil size-20" data-id="<%= issue['id'] %>"></i>
           <i class="saveissue step fi-plus size-20" data-id="<%= issue['id'] %>"></i>
         </div>
         <input type="submit" name="actualizar" value="Actualizar">
+
+
       </form>
     </div>
   <% end %>
+
+  <div class="notes" style="width:30%">
+    <fieldset>
+      <legend>Notes:</legend>
+      <textarea id="textarea_notes" cols="60" row="10" name="notes" value="" class="textarea_notes"></textarea>
+      <input type="checkbox" name="private_notes" value=""><label>Private notes</label>
+    </fieldset>
+  </div>
 
 
 </article>

@@ -14,7 +14,7 @@ class SmartRedmine < Sinatra::Base
        cookies[:project_id] = params[:id]
     end
 
-    
+    #binding.pry
 
     if flash[:message_issue_updated]
       @message = flash[:message_issue_updated]

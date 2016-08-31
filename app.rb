@@ -23,6 +23,7 @@ require_relative 'helpers/init'
 class SmartRedmine < Sinatra::Base
   helpers Sinatra::CleanHash
   helpers Sinatra::Ahah
+  helpers Sinatra::ChangeDate
   helpers Sinatra::Cookies
 
   ROOT = File.dirname(__FILE__)
@@ -50,10 +51,6 @@ class SmartRedmine < Sinatra::Base
           '/js/vendor/pickadate/lib/compressed/picker.js',
           '/js/vendor/pickadate/lib/compressed/picker.date.js',
           '/js/vendor/pickadate/lib/compressed/picker.time.js',
-
-
-
-
         ]
 
         serve '/css', :from => 'asset/css'

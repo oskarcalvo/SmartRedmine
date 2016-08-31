@@ -31,13 +31,13 @@ $(document).ready(function(){
 
 	$('.issue_start_date').pickadate({
 		firstDay: 1,
-		formatSubmit: 'd-m-yyyy',
-		format: 'd-m-yyyy',
+		formatSubmit: 'yyyy-mm-dd',
+		format: 'yyyy-mm-dd',
 	});
 	$('.issue_due_date').pickadate({
 		firstDay: 1,
-		formatSubmit: 'd-m-yyyy',
-		format: 'd-m-yyyy',
+		formatSubmit: 'yyyy-mm-dd',
+		format: 'yyyy-mm-dd',
 	});
 
 });
