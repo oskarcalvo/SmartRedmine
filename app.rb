@@ -43,7 +43,17 @@ class SmartRedmine < Sinatra::Base
           '/js/jquery.js',
           '/js/foundation.min.js',
           '/js/easyredmine.js',
-          '/js/vendor/*.js'
+          #'/js/vendor/*.js',
+          #'/js/vendor/SimpleMDE/*.js',
+          #'/js/vendor/SimpleMDE/codemirror/*.js'
+          '/js/vendor/pickadate/lib/compressed/legacy.js',
+          '/js/vendor/pickadate/lib/compressed/picker.js',
+          '/js/vendor/pickadate/lib/compressed/picker.date.js',
+          '/js/vendor/pickadate/lib/compressed/picker.time.js',
+
+
+
+
         ]
 
         serve '/css', :from => 'asset/css'
