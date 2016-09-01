@@ -12,13 +12,17 @@
       <%= js :application %>
       <%= css :application %>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
 
   </head>
 
   <body class="main">
-    <div class="content">
+    <div class="container">
       <%= yield %>
     </div>
     <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   </body>
 </html>

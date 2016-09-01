@@ -1,47 +1,34 @@
 <article>
-<div class="small-12 columns">
-    <div class="icon-bar five-up" role="navigation"style="    position: fixed;
-    z-index: 99;" >
-      <a class="item">
-        <img src="../assets/img/images/fi-home.svg" >
-        <label>Home</label>
-      </a>
-      <a class="item">
-        <img src="../assets/img/images/fi-bookmark.svg" >
-        <label>Bookmark</label>
-      </a>
-    </div>
+
+<div class="row">
+  <div class="col s6 offset-s4" style="margin-top: 150px;">
+    <% if @message %>
+      <%= @message %>
+    <% end %>
   </div>
-</div>
-
-<div class="row" style="margin-top: 150px;">
-
-<% if @message %>
-  <%= @message %>
-<% end %>
 </div>
 <% # raise @members.inspect %>
 
   <div class="row">
-    <div class=" columns" style="width:25%">
+    <div class="col s2" >
       Asunto
     </div>
-    <div class=" columns" style="width:12%">
+    <div class="col s1" >
       Tipo
     </div>
-    <div class=" columns" style="width:12%">
+    <div class="col s1" >
       Estado
     </div>
-    <div class=" columns" style="width:12%">
+    <div class="col s1" >
       Prioridad
     </div>
-    <div class=" columns" style="width:15%">
+    <div class="col s1" >
       Asignado a
     </div>
-    <div class=" columns" style="width:12%">
+    <div class="col s1" >
       Fechas
     </div>
-    <div class=" columns" style="width:5%">
+    <div class="col s1" >
     Acción
     </div>
   </div>
@@ -49,61 +36,63 @@
 
   <% @issues.each do |issue|  %>
     <div class="row" data-issue-id="<%= issue['id'] %>" style="margin-top: 20px;">
-      <form action="/issues/<%= issue['id'] %>" method="POST">
-        <input type="hidden" name="_method" value="put">
-        <div class=" columns" style="width:25%">
+      <form class="" action="/issues/<%= issue['id'] %>" method="POST">
+
+        <div class="col s2 input-field">
           <input type="hidden" name="project_id" value="<%=issue['project']['id'] %>">
-          <a target="_blank" href="<%= @path %>issues/<%= issue['id'] %>">
-            <%= issue['id'] %>
-          </a>
-          <span  data-tooltip aria-haspopup="true" class="has-tip" title="<%= issue['description'] %>" >
+          <input type="hidden" name="_method" value="put">
+          <p>
+            <a target="_blank" href="<%= @path %>issues/<%= issue['id'] %>">
+              <%= issue['id'] %>
+            </a>
             <input type="hidden" name="subjetc" class="disabled" value="<%= issue['subject'] %>">
             <%= issue['subject'] %>
-          </span>
+          </p>
         </div>
-        <div class=" columns" style="width:12%">
-          <span data-tracker-id="<%= issue['tracker']['id'] %>">
-            <%= select('tracker_id', @trackers, issue['tracker']['id'] ) %>
-          </span>
+        <div class="input-field col s1">
+          <%= select('tracker_id', @trackers, issue['tracker']['id'] ) %>
         </div>
-        <div class=" columns" style="width:12%">
+        <div class="col s1 input-field">
           <span data-status-id="<%= issue['status']['id'] %>">
             <%= select('status_id', @status, issue['status']['id']) %>
           </span>
         </div>
-        <div class=" columns" style="width:12%">
+        <div class="col s1 input-field">
           <span data-priority-id="<%= issue['priority']['id'] %>">
             <%= select('priority_id' , @priorities, issue['priority']['id']) %>
           </span>
         </div>
-        <div class=" columns" style="width:15%">
+        <div class="col s1 input-field">
           <span data-assigned_to_id="<%= issue['assigned_to']['id'] if issue['assigned_to']  %>">
             <% assigned_to_id = !(issue['assigned_to'] == nil) ? issue['assigned_to']['id'] : '' %>
             <%= select('assigned_to_id', @members, assigned_to_id ) %>
           </span>
         </div>
-        <div class=" columns" style="width:12%">
-          Start: <input type="date" class="issue_start_date" name="start_date" value="<%= issue['start_date'] %>">
-          End:   <input type="date" class="issue_due_date" name="due_date" value="<%= issue['due_date'] %>">
+        <div class="col s1 input-field">
+          From <input type="date" class="issue_start_date" name="start_date" value="<%= issue['start_date'] %>">  To <input type="date" class="issue_due_date" name="due_date" value="<%= issue['due_date'] %>">
         </div>
-        <div class=" columns" style="width:5%">
-          <i class="saveissue step fi-pencil size-20" data-id="<%= issue['id'] %>"></i>
-          <i class="saveissue step fi-plus size-20" data-id="<%= issue['id'] %>"></i>
+        <div class="col s1">
+          <i class="material-icons small" data-id="<%= issue['id'] %>" title="Read the comments.">forum</i>
+
+          <a title="Add a note to the ticket" class="modal-trigger" href="#modal<%= issue['id'] %>"> <i class="material-icons small" data-id="<%= issue['id'] %>">add_comment</i></a>
+          <div id="modal<%= issue['id'] %>" class="modal">
+            <div class="modal-content">
+              <legend>Notes:</legend>
+              <textarea id="textarea_notes" cols="60" row="10" name="notes" value="" class="textarea_notes"></textarea>
+              <p>
+                <input id="form<%= issue['id'] %>" type="checkbox" name="private_notes" value=""><label for="form<%= issue['id'] %>">Private notes</label>
+                </p>
+            </div>
+          </div>
+
         </div>
-        <input type="submit" name="actualizar" value="Actualizar">
+        <button type="submit" name="actualizar" value="Actualizar"><i class="material-icons small" data-id="<%= issue['id'] %>">input</i></button>
 
 
       </form>
     </div>
   <% end %>
 
-  <div class="notes" style="width:30%">
-    <fieldset>
-      <legend>Notes:</legend>
-      <textarea id="textarea_notes" cols="60" row="10" name="notes" value="" class="textarea_notes"></textarea>
-      <input type="checkbox" name="private_notes" value=""><label>Private notes</label>
-    </fieldset>
-  </div>
 
 
 </article>

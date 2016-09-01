@@ -54,7 +54,11 @@ class SmartRedmine < Sinatra::Base
         ]
 
         serve '/css', :from => 'asset/css'
-        css :application, ['/css/*.css']
+        css :application, [
+          '/css/*.css',
+          '/css/vendor/pickadate/*.css'
+
+        ]
       end
 
 
