@@ -1,3 +1,4 @@
+# encoding: utf-8
 class RedmineIssues
 
 
@@ -18,7 +19,7 @@ class RedmineIssues
   def get_project_users(path, session)
 
     response = RedmineConnect2API.new.connect(path, {user: session[:loginname], pass: session[:loginpass] })
-    #binding.pry
+
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
@@ -75,7 +76,7 @@ class RedmineIssues
   def put_issue(path, args = {})
 
     response = RedmineConnect2API.new.put(path, args)
-    
+
     case response
     when  Net::HTTPSuccess then
       return true

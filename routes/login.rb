@@ -3,6 +3,12 @@ class SmartRedmine < Sinatra::Base
     erb :'../views/loginform'
   end
 
+  get '/loginvalidate' do
+    
+      if !response.nil?
+        redirect '/login'
+      end
+  end
 
   post '/loginvalidate' do
 

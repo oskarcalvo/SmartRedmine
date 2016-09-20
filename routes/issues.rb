@@ -1,8 +1,11 @@
 # encoding: utf-8
 class SmartRedmine < Sinatra::Base
 
+
   get '/issues/:id' do
     require_logged_in
+    path = @config['config']['url'] + 'issues/' + params[:id] + '.json?include=journals&key=' + session[:user]['api_key']
+    response = RedmineIssues.new.get_issues path
 
   end
 

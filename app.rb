@@ -16,6 +16,7 @@ require_relative 'libs/redmine_user.rb'
 require_relative 'libs/redmine_issues.rb'
 require_relative 'libs/redmine_journals.rb'
 require_relative 'libs/redmine_connect2api.rb'
+require_relative 'libs/issues.rb'
 require_relative 'helpers/init'
 
 

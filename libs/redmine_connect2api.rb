@@ -5,7 +5,6 @@ class RedmineConnect2API
   # Se pasa un hash con dos elementos user y pass
   def connect (path, args = {})
 
-    #binding.pry
     uri = URI.parse(path)
     req = Net::HTTP::Get.new(uri)
     response = nil
@@ -15,8 +14,6 @@ class RedmineConnect2API
     end
 
     res = Net::HTTP.start(uri.hostname, uri.port) {|http|	  response = http.request(req)	}
-    #binding.pry
-
 
   end
 
