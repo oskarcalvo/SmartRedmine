@@ -29,7 +29,6 @@ class RedmineConnect2API
     end
 
     res = Net::HTTP.start(uri.hostname, uri.port)  {|http|	  response = http.request(req)	}
-    binding.pry
 
     return res
   end
