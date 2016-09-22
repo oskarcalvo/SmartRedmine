@@ -5,12 +5,14 @@ require 'yaml'
 require 'pry'
 require 'json'
 require 'sinatra/assetpack'
+require 'sinatra/settings'
+require 'sinatra/logger'
+require 'sinatra/js'
 require 'redcarpet'
 require 'rerun'
 require 'sinatra/cookies'
 require 'sinatra/flash'
 require 'rack/csrf'
-
 
 
 require_relative 'libs/redmine_user.rb'
