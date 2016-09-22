@@ -6,3 +6,7 @@ helpers Sinatra::Ahah
 
 require_relative 'change_date.rb'
 helpers Sinatra::ChangeDate
+
+require_relative 'rack_csrf.rb'
+helpers Sinatra::CsrfTag
+helpers Sinatra::CsrfToken

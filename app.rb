@@ -7,8 +7,9 @@ require 'json'
 require 'sinatra/assetpack'
 require 'redcarpet'
 require 'rerun'
-require "sinatra/cookies"
-require "sinatra/flash"
+require 'sinatra/cookies'
+require 'sinatra/flash'
+require 'rack/csrf'
 
 
 
@@ -26,6 +27,8 @@ class SmartRedmine < Sinatra::Base
   helpers Sinatra::Ahah
   helpers Sinatra::ChangeDate
   helpers Sinatra::Cookies
+  helpers Sinatra::CsrfTag
+  helpers Sinatra::CsrfToken
 
   ROOT = File.dirname(__FILE__)
 
