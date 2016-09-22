@@ -4,7 +4,7 @@ class RedmineUser
 
   def initialize()
     @config = YAML.load_file( SmartRedmine::ROOT + "/conf/config.yaml")
-
+    
   end
 
   def get_user (user, pass)
@@ -40,8 +40,6 @@ class RedmineUser
     else
       return nil
     end
-
-
 
   end
 

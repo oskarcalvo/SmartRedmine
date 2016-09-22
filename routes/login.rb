@@ -4,7 +4,6 @@ class SmartRedmine < Sinatra::Base
   end
 
   get '/loginvalidate' do
-    
       if !response.nil?
         redirect '/login'
       end

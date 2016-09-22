@@ -3,10 +3,14 @@ class SmartRedmine < Sinatra::Base
 
 
   get '/issues/:id' do
+
+
     require_logged_in
     path = @config['config']['url'] + 'issues/' + params[:id] + '.json?include=journals&key=' + session[:user]['api_key']
     response = RedmineIssues.new.get_issues path
+    binding.pry
 
+    erb "<pre>#{response.issue}</pre>"
   end
 
   put '/issues/:id' do

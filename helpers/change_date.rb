@@ -9,5 +9,6 @@ module Sinatra
       Date.parse(date).strftime("%d-%m-%Y")
     end
   end
+  
   helpers ChangeDate
 end
