@@ -8,3 +8,20 @@
 tr:hover {
     background: #B9B7B7;
 }
+
+body {
+  background-color: #F5F5F5;
+}
+
+.issue_card {
+  background-color: white;
+}
+.divider {
+  margin: 15px 0;
+}
+.comentario-block {
+  display: none;
+  padding: 25px;
+  width: 75%;
+  margin:auto;
+}

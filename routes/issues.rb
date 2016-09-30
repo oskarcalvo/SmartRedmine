@@ -8,7 +8,6 @@ class SmartRedmine < Sinatra::Base
     require_logged_in
     path = @config['config']['url'] + 'issues/' + params[:id] + '.json?include=journals&key=' + session[:user]['api_key']
     response = RedmineIssues.new.get_issues path
-    binding.pry
 
     erb "<pre>#{response.issue}</pre>"
   end
@@ -21,12 +20,7 @@ class SmartRedmine < Sinatra::Base
     params.delete("captures")
     params.delete("splat")
     params.delete("actualizar")
-    #params["start_date"] = params["start_date_submit"]
-    #params.delete("start_date_submit")
-    #params["due_date"] = params["due_date_submit"]
-    #params.delete("due_date_submit")
-    binding.pry
-
+    
     path = @config['config']['url'] + 'issues/' + params[:id] + '.json'
     args = {
       issue:  params,

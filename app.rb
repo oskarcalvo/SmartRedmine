@@ -12,8 +12,7 @@ require 'redcarpet'
 require 'rerun'
 require 'sinatra/cookies'
 require 'sinatra/flash'
-require 'rack/csrf'
-
+#require 'rack/csrf' # TODO: resolver esto, es importante tener un csrf por motivos de seguridad en los formularios.
 
 require_relative 'libs/redmine_user.rb'
 require_relative 'libs/redmine_issues.rb'
@@ -21,8 +20,6 @@ require_relative 'libs/redmine_journals.rb'
 require_relative 'libs/redmine_connect2api.rb'
 require_relative 'libs/issues.rb'
 require_relative 'helpers/init'
-
-
 
 class SmartRedmine < Sinatra::Base
   helpers Sinatra::CleanHash
@@ -45,25 +42,22 @@ class SmartRedmine < Sinatra::Base
 
       register Sinatra::AssetPack
       assets do
+        serve '/images', :from => 'asset/img/'
         serve '/js', :from => 'asset/js'
         js :application, [
           '/js/jquery.js',
           '/js/foundation.min.js',
           '/js/easyredmine.js',
-          #'/js/vendor/*.js',
-          #'/js/vendor/SimpleMDE/*.js',
-          #'/js/vendor/SimpleMDE/codemirror/*.js'
           '/js/vendor/pickadate/lib/compressed/legacy.js',
-          '/js/vendor/pickadate/lib/compressed/picker.js',
-          '/js/vendor/pickadate/lib/compressed/picker.date.js',
-          '/js/vendor/pickadate/lib/compressed/picker.time.js',
+          #'/js/vendor/pickadate/lib/compressed/picker.js',
+          #'/js/vendor/pickadate/lib/compressed/picker.date.js',
+          #'/js/vendor/pickadate/lib/compressed/picker.time.js',
         ]
 
         serve '/css', :from => 'asset/css'
         css :application, [
           '/css/*.css',
           '/css/vendor/pickadate/*.css'
-
         ]
       end
 
@@ -76,12 +70,10 @@ class SmartRedmine < Sinatra::Base
   end
 
   def require_logged_in
-   # binding.pry
     redirect('login') if is_not_authenticated?
   end
 
   def is_not_authenticated?
-    #binding.pry
     return session[:user].nil?
   end
 

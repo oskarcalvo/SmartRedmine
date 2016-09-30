@@ -15,14 +15,18 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-	var simplemde = new SimpleMDE({
-		autofocus: true,
-		toolbar: ["bold", "italic", "heading", "|", "quote","code", "|", "unordered-list","ordered-list","table"],
-		element: document.getElementById("textarea_notes"),
-		showIcons: ["code", "table"],
-		spellChecker: false
-	});
 
+
+	$('textarea').each(function() {
+		var simplemde = new SimpleMDE({
+			autofocus: true,
+			toolbar: ["bold", "italic", "heading", "|", "quote","code", "|", "unordered-list","ordered-list","table"],
+			element: this,
+			showIcons: ["code", "table"],
+			spellChecker: false
+		});
+   	simplemde.render();
+	})
 
 });
 
@@ -43,5 +47,27 @@ $(document).ready(function(){
 });
 
 $(document).ready(function() {
-    $('select').material_select();
-  });
+	$('select').material_select();
+});
+
+
+	$(document).ready(function(){
+
+		// Initialize collapse button
+	  $(".button-collapse").sideNav();
+	  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+	  //$('.collapsible').collapsible();
+
+	});
+
+
+$(document).ready(function(){
+	$(".comentario-link").click(function(){
+		var comentario_issue_id = $(this).attr('data-id');
+		$(".comentario-block").hide( "slow" );
+		var comentario_id = 'comentario-' + comentario_issue_id;
+		$("#" + comentario_id).fadeToggle("slow", "linear");
+
+	});
+
+});

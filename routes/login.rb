@@ -12,11 +12,8 @@ class SmartRedmine < Sinatra::Base
   post '/loginvalidate' do
 
     response = RedmineUser.new.get_user(params[:name],params[:password])
-    #Si response no devuelve el objeto del usuario de redmine volvemos a la página de login
 
     if !response.nil?
-
-
       #guardamos los datos de user/pass y objeto de usuario de redmine en la sesión de sinatra
       session[:loginname] = params[:name]
       session[:loginpass] = params[:password]
@@ -25,12 +22,10 @@ class SmartRedmine < Sinatra::Base
       if cookies['project_id']
         redirect '/project/' + cookies[:project_id]
       end
-
       redirect '/user'
     else
       redirect '/login'
     end
-    ##binding.pry
   end
 
 end

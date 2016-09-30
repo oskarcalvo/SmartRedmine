@@ -1,20 +1,13 @@
 # encoding: utf-8
 class SmartRedmine < Sinatra::Base
   get '/project/:id' do
-    #binding.pry
     #validamos si el usuario se ha autentificado correctamente.
     require_logged_in
-
-    if is_not_authenticated?
-      redirect('login')
-      return
-    end
 
     if cookies[:project_id] != params[:id]
        cookies[:project_id] = params[:id]
     end
 
-    #binding.pry
 
     if flash[:message_issue_updated]
       @message = flash[:message_issue_updated]
@@ -32,7 +25,6 @@ class SmartRedmine < Sinatra::Base
 
     if response
       @issues = response['issues']
-      #binding.pry
     end
 
     pathmembers = @config['config']['url'] + 'projects/' + params[:id] + '/memberships.json'
@@ -61,7 +53,6 @@ class SmartRedmine < Sinatra::Base
 
     #Pasamos la variable con la url de redmine.
     @path = @config['config']['url']
-    #binding.pry
 
     erb :'../views/issues'
 

@@ -3,11 +3,6 @@ class SmartRedmine < Sinatra::Base
   get '/user' do
     #validamos si el usuario se ha autentificado correctamente.
     require_logged_in
-    # binding.pry
-    if is_not_authenticated?
-      redirect('login')
-      return
-    end
 
     if cookies['project_id']
       redirect '/project/' + cookies[:project_id]
