@@ -20,7 +20,7 @@ class SmartRedmine < Sinatra::Base
       session[:user] = response['user']
 
       if cookies['project_id']
-        redirect '/project/' + cookies[:project_id]
+        redirect '/projects/' + cookies[:project_id]
       end
       redirect '/user'
     else

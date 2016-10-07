@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SmartRedmine < Sinatra::Base
-  get '/project/:id' do
+  get '/projects/:id' do
     #validamos si el usuario se ha autentificado correctamente.
     require_logged_in
 
@@ -45,14 +45,22 @@ class SmartRedmine < Sinatra::Base
       @trackers = cleanhash ( responsetrackers['project']['trackers'])
     end
 
-    pathstatus = @config['config']['url'] + '/issue_statuses.json'
+    pathstatus = @config['config']['url'] + 'issue_statuses.json'
     responsestatus = RedmineIssues.new.get_issue_status pathstatus, session
     if responsestatus
       @status = cleanhash ( responsestatus['issue_statuses'])
     end
 
-    #Pasamos la variable con la url de redmine.
+    pathversions = @config['config']['url'] + 'projects/' + params[:id] + '/versions.json'
+    responseversions = RedmineIssues.new.get_project_versions pathversions, session
+
+    if responseversions
+      @versions = cleanhash (responseversions)
+    end
+
+
     @path = @config['config']['url']
+    @project_id = params[:id]
 
     erb :'../views/issues'
 

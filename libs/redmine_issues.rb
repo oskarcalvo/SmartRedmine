@@ -73,6 +73,21 @@ class RedmineIssues
 
   end
 
+  def get_project_versions(path, session)
+
+    response = RedmineConnect2API.new.connect(path, {user: session[:loginname], pass: session[:loginpass]})
+
+    case response
+    when  Net::HTTPSuccess then
+      data = JSON.parse(response.body)
+      return   data['total_count'].to_i == 0 ? nil : data
+    else
+      return nil
+    end
+
+  end
+
+
   def put_issue(path, args = {})
 
     response = RedmineConnect2API.new.put(path, args)
@@ -86,5 +101,17 @@ class RedmineIssues
 
   end
 
+  def post_issue(path, args = {})
+
+    response = RedmineConnect2API.new.post(path, args)
+
+    case response
+    when  Net::HTTPSuccess then
+      return true
+    else
+      return nil
+    end
+
+  end
 
 end

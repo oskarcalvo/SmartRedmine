@@ -1,6 +1,15 @@
 
 <article>
 
+<%= erb :_new_issue , :locals =>{
+  :trackers => @trackers,
+  :status => @status,
+  :priorities =>  @priorities,
+  :members => @members,
+  :project_id => @project_id,
+
+  } %>
+
 <div class="row">
   <% if @message %>
     <div class="col s6 offset-s4" style="margin-top: 150px;">
@@ -8,7 +17,6 @@
     </div>
   <% end %>
 </div>
-
   <% @issues.each do |issue|  %>
     <div class="row issue_card" data-issue-id="<%= issue['id'] %>" style="margin-top: 20px;">
       <form class="" action="/issues/<%= issue['id'] %>" method="POST">
@@ -65,14 +73,18 @@
         <button type="submit" name="actualizar" value="Actualizar">Actualizar</button>
       </div>
       <div id="comentario-<%= issue['id'] %>" class="comentario-block">
-        <div>
-          <legend>Notes:</legend>
-          <textarea id="textarea_notes" cols="30" row="50" name="notes" value="" class="textarea_notes"></textarea>
+        <div class="comentario-notes">
+
+        </div>
+        <div class="comentario-ide">
+          <div class="divider"></div>
+
+          <label for="textarea-notes-<%=issue['id'] %>">Nuevo comentario:</label>
+          <textarea id="textarea-notes-<%=issue['id'] %>" cols="30" row="50" name="notes" value="" class="textarea_notes"></textarea>
           <p>
-            <input id="form<%= issue['id'] %>" type="checkbox" name="private_notes" value=""><label for="form<%= issue['id'] %>">Private notes</label>
+            <input id="form<%= issue['id'] %>" type="checkbox" name="private_notes" value=""><label for="form<%= issue['id'] %>">Comentario pridao</label>
             <button type="submit" class="right" name="actualizar" value="Actualizar">Comentar</button>
           </p>
-
         </div>
       </div>
       </form>

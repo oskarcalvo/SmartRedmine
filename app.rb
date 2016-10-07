@@ -13,6 +13,7 @@ require 'rerun'
 require 'sinatra/cookies'
 require 'sinatra/flash'
 #require 'rack/csrf' # TODO: resolver esto, es importante tener un csrf por motivos de seguridad en los formularios.
+#require 'sinatra/handlebars'
 
 require_relative 'libs/redmine_user.rb'
 require_relative 'libs/redmine_issues.rb'
@@ -28,6 +29,8 @@ class SmartRedmine < Sinatra::Base
   helpers Sinatra::Cookies
   helpers Sinatra::CsrfTag
   helpers Sinatra::CsrfToken
+  helpers Sinatra::IssueNotes
+  helpers Sinatra::MarkdownHelper
 
   ROOT = File.dirname(__FILE__)
 
@@ -40,6 +43,11 @@ class SmartRedmine < Sinatra::Base
     set :static_cache_control, [:public, max_age: 60 * 60 * 24 * 365]
     enable :method_override
 
+      #register Sinatra::Handlebars
+      #handlebars {
+      #  templates '/js/templates.js',['app/view/handlebars/*']
+      #}
+
       register Sinatra::AssetPack
       assets do
         serve '/images', :from => 'asset/img/'
@@ -49,6 +57,7 @@ class SmartRedmine < Sinatra::Base
           '/js/foundation.min.js',
           '/js/easyredmine.js',
           '/js/vendor/pickadate/lib/compressed/legacy.js',
+          #'/js/handlebars/*.hbs',
           #'/js/vendor/pickadate/lib/compressed/picker.js',
           #'/js/vendor/pickadate/lib/compressed/picker.date.js',
           #'/js/vendor/pickadate/lib/compressed/picker.time.js',

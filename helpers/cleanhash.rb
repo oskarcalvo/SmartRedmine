@@ -10,9 +10,9 @@ module Sinatra
         newhash[option_value] = option_name
       end
       newhash
-    
+
     end
   end
-  
+
   helpers CleanHash
 end

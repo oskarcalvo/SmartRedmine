@@ -10,3 +10,9 @@ helpers Sinatra::ChangeDate
 require_relative 'rack_csrf.rb'
 helpers Sinatra::CsrfTag
 helpers Sinatra::CsrfToken
+
+require_relative 'issue_notes'
+helpers Sinatra::IssueNotes
+
+require_relative 'markdown'
+helpers Sinatra::MarkdownHelper
