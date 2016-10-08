@@ -1,0 +1,71 @@
+<div class="row" style="margin:10px 0px;">
+  <div class="col s6 offset-s6" >
+    <span class="flow-test" style="margin:10px;">
+      <a class="modal-trigger btn right modal-close" href="#newissue">
+        <i class="tyni material-icons">note_add </i>Nueva incidencia
+      </a>
+    </span>
+  </div>
+</div>
+
+<div id="newissue" class="modal">
+  <div class="modal-content">
+    <form class="col s12 offset-6" action="/issues/new" method="POST">
+
+      <input type="hidden" name="project_id" value="<%= project_id %>">
+      <div class="col s6 input-field">
+        <%= select('tracker_id', @trackers, nil ) %>
+        <label>Tipo:</label>
+      </div>
+
+      <div class="col s6 input-field">
+        <%= select('status_id', @status, nil ) %>
+        <label>Estado:</label>
+      </div>
+
+      <div class="col s6 input-field">
+        <%= select('priority_id' , @priorities, nil) %>
+        <label>Prioridad:</label>
+      </div>
+
+      <div class="col s6 input-field">
+        <%= select('assigned_to_id', @members, nil ) %>
+        <label>Asignado a:</label>
+      </div>
+
+      <div class="col s6 input-field">
+        <input type="number" step="0.01" name="estimated_hours" value="">
+        <label>Tiempo estimado:</label>
+      </div>
+
+      <div class="col s6 input-field">
+        <%= select('fixed_version_id', @versions, nil ) %>
+        <label>Versión:</label>
+      </div>
+
+      <div class="input-field col s12">
+        <input name="subject" id="Newsubject" type="text" class="validate" required>
+        <label for="Newsubject">Título</label>
+      </div>
+
+      <div class="input-field col s12 comentario-ide">
+        <label for="Newdescription">Descripción</label>
+        <br><br>
+        <textarea id="Newdescription" cols="30" row="50" class="textarea_notes" name="description"></textarea>
+      </div>
+
+
+      <div class="col s12 input-field" >
+        <input type="checkbox" id="Newprivate" name="is_private" />
+        <label for="Newprivate">Privado:</label>
+      </div>
+
+      <div class="col s12 input-field" style="padding-bottom:25px;">
+        <button class="right" type="submit" name="actualizar" value="Actualizar">Actualizar</button>
+      </div>
+    </form>
+
+<!--   parent_issue_id - ID of the parent issue    watcher_user_ids - Array of user ids to add as watchers (since 2.3.0) -->
+
+  </div>
+</div>
