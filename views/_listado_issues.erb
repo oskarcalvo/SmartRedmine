@@ -72,21 +72,7 @@
         </div>
         <button type="submit" name="actualizar" value="Actualizar">Actualizar</button>
       </div>
-      <div id="comentario-<%= issue['id'] %>" class="comentario-block">
-        <div class="comentario-notes">
-
-        </div>
-        <div class="comentario-ide">
-          <div class="divider"></div>
-
-          <label for="textarea-notes-<%=issue['id'] %>">Nuevo comentario:</label>
-          <textarea id="textarea-notes-<%=issue['id'] %>" cols="30" row="50" name="notes" value="" class="textarea_notes"></textarea>
-          <p>
-            <input id="form<%= issue['id'] %>" type="checkbox" name="private_notes" value=""><label for="form<%= issue['id'] %>">Comentario pridao</label>
-            <button type="submit" class="right" name="actualizar" value="Actualizar">Comentar</button>
-          </p>
-        </div>
-      </div>
+      <%= erb :_notes, :locals =>{:issue_id => issue['id'],} %>
       </form>
     </div>
   <% end %>

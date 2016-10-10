@@ -1,0 +1,16 @@
+
+<div id="comentario-<%= issue_id %>" class="comentario-block">
+  <div class="comentario-notes">
+
+  </div>
+  <div class="comentario-ide">
+    <div class="divider"></div>
+
+    <label for="textarea-notes-<%= issue_id %>">Nuevo comentario:</label>
+    <textarea id="textarea-notes-<%= issue_id %>" cols="30" row="50" name="notes" value="" class="textarea_notes"></textarea>
+    <p>
+      <input id="form<%= @issue_id %>" type="checkbox" name="private_notes" value=""><label for="form<%= issue_id %>">Comentario pridao</label>
+      <button type="submit" class="right" name="actualizar" value="Actualizar">Comentar</button>
+    </p>
+  </div>
+</div>
