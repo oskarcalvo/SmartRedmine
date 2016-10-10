@@ -72,14 +72,6 @@ $(document).ready(function(){
 			var smart_redmine_api_url =  window.location.protocol + "//" + window.location.host +  "/issues/" + comentario_issue_id +'/journals';
 			console.log(smart_redmine_api_url);
 			$.getJSON( smart_redmine_api_url, function(data){
-				/*
-				//TODO: como se comprueba que recupera información
-				$.each( data, function (key, val){
-					//id, name, notes, created_on
-					console.log(val.id)
-						$('#comentario-' + comentario_issue_id +  ' > .comentario-notes').append('<div class="note-wrapper"> <span>' + val.name + '</span> <time datetime="">' + val.created_on + '</time><span>' + val.notes + '</span></div>');
-				});
-				*/
 			})
 			.done(function(data){
 				if ( $.isEmptyObject (data)) {
