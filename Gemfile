@@ -16,3 +16,4 @@ gem 'sinatra-settings'
 gem 'sinatra-logger'
 gem 'sinatra-js'
 #gem 'sinatra-handlebars', '~> 0.0.4'
+#gem 'simpleform' #TODO: mira si sirve para montar los formularios.
