@@ -62,7 +62,8 @@ $(document).ready(function() {
 
 
 $(document).ready(function(){
-	$(".comentario-link").click(function(){
+	$(".comentario-link").click(function(e){
+		e.preventDefault();
 		var comentario_issue_id = $(this).attr('data-id');
 
 		console.log(comentario_issue_id);
@@ -91,9 +92,8 @@ $(document).ready(function(){
 			;
 		}
 
-
-		$(".comentario-block").hide( "slow" );
 		var comentario_id = 'comentario-' + comentario_issue_id;
+		$(".comentario-block").not("#" + comentario_id).hide( "slow" );
 		$("#" + comentario_id).fadeToggle("slow", "linear");
 
 	});
