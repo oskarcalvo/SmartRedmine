@@ -1,4 +1,6 @@
 
+
+
 <article>
 
 <%= erb :_new_issue , :locals =>{
@@ -10,13 +12,15 @@
 
   } %>
 
-<div class="row">
+
   <% if @message %>
-    <div class="col s6 offset-s4" style="margin-top: 150px;">
-      <%= @message %>
+    <div class="row">
+      <div class="col s6 offset-s4" style="margin-top: 150px;">
+        <%= @message %>
+      </div>
     </div>
   <% end %>
-</div>
+
   <% @issues.each do |issue|  %>
     <div class="row issue_card" data-issue-id="<%= issue['id'] %>" style="margin-top: 20px;">
       <form class="" action="/issues/<%= issue['id'] %>" method="POST">

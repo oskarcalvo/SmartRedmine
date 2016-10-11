@@ -21,7 +21,7 @@
   <body class="main">
     <div class="container">
       <%= erb :_navbar %>
-      <%= erb :_side_nav_bar %>
+      <%= erb :_side_nav_bar, :locals =>{ :projectlist => @projectlist,} %>
       <%= yield %>
     </div>
     <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
