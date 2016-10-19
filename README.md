@@ -11,10 +11,15 @@ Este es el listado de ramas creadas y las diferentes features que se tiene que d
 * multisite: Esta rama es para explorar la posibilidad de tener un multisite en el proyecto.
 * rack_csrf: Esta rama es para hacer funcionar correctamente la gema de rack_csrf que añade una capa de seguridad en los formularios del proyecto.
 * sidenav: Esta rama es para crear el menú lateral de navegación, y las funcionalidades que contiene este menú lateral de navegación:
+
  ** Listar los proyectos de a los que tienen acceso los usuarios.
+
  ** Definir los campos que se quieren ver.
+
  ** Definir el orden de los campos.
+
  ** Definir los filtros para ordenar el listado de incidencias resueltas.
+
 
 
 
