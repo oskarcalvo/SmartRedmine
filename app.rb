@@ -36,7 +36,7 @@ class SmartRedmine < Sinatra::Base
   ROOT = File.dirname(__FILE__)
 
   configure do
-
+    binding.pry
     set :ROOT, File.dirname(__FILE__)
     set :bind, '0.0.0.0'
     enable :sessions
@@ -58,10 +58,6 @@ class SmartRedmine < Sinatra::Base
           '/js/foundation.min.js',
           '/js/easyredmine.js',
           '/js/vendor/pickadate/lib/compressed/legacy.js',
-          #'/js/handlebars/*.hbs',
-          #'/js/vendor/pickadate/lib/compressed/picker.js',
-          #'/js/vendor/pickadate/lib/compressed/picker.date.js',
-          #'/js/vendor/pickadate/lib/compressed/picker.time.js',
         ]
 
         serve '/css', :from => 'asset/css'
@@ -71,12 +67,11 @@ class SmartRedmine < Sinatra::Base
         ]
       end
 
-
-
   end
 
   before do
-    @config = YAML.load_file("conf/config.yaml")
+    @config = ENV['Redmine_uri'] || "development"
+    YAML.load_file("conf/config.yaml")[@config]
   end
 
   def require_logged_in
