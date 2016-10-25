@@ -35,7 +35,6 @@ class SmartRedmine < Sinatra::Base
   ROOT = File.dirname(__FILE__)
 
   configure do
-    binding.pry
     set :ROOT, File.dirname(__FILE__)
     set :bind, '0.0.0.0'
     enable :sessions

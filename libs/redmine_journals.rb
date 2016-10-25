@@ -33,7 +33,6 @@ class RedmineJournals
 
     # end
 
-    # binding.pry
     # puts journal
 
     return journal

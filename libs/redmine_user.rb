@@ -28,7 +28,6 @@ class RedmineUser
     path = @config['config']['url'] + USERPROJECTS + '&key=' + apikey
 
     response = RedmineConnect2API.new.connect(path)
-    #binding.pry
 
     #projects = nil
 
