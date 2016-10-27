@@ -34,7 +34,6 @@ class RedmineIssues
   def get_issue_priorities(path, session)
 
     response = RedmineConnect2API.new.connect(path, {user: session[:loginname], pass: session[:loginpass]})
-    #binding.pry
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
@@ -48,7 +47,6 @@ class RedmineIssues
   def get_issue_data(path, session)
 
     response = RedmineConnect2API.new.connect(path, {user: session[:loginname], pass: session[:loginpass]})
-    #binding.pry
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
@@ -62,7 +60,6 @@ class RedmineIssues
   def get_issue_status(path, session)
 
     response = RedmineConnect2API.new.connect(path, {user: session[:loginname], pass: session[:loginpass]})
-    #binding.pry
     case response
     when  Net::HTTPSuccess then
       data = JSON.parse(response.body)
