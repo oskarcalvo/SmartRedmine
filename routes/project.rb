@@ -14,7 +14,7 @@ class SmartRedmine < Sinatra::Base
     end
 
     path = @config['config']['url'] + 'issues.json?project_id=' + params[:id] + '&key=' + session[:user]['api_key']
-    response = RedmineIssues.new.get_issues path
+    response = Redmine::Issues.new.get_issues path
 
     if response && response['total_count'] == 0
 
@@ -28,31 +28,31 @@ class SmartRedmine < Sinatra::Base
     end
 
     pathmembers = @config['config']['url'] + 'projects/' + params[:id] + '/memberships.json'
-    responsemembers = RedmineIssues.new.get_project_users pathmembers,session
+    responsemembers = Redmine::Issues.new.get_project_users pathmembers,session
     if !responsemembers.nil?
       @members = responsemembers['memberships'].inject({}) {|sum, elem| sum[elem['user']['id']] = elem['user']['name']; sum}
     end
 
     pathpriorities = @config['config']['url'] + 'enumerations/issue_priorities.json'
-    responsepriorities = RedmineIssues.new.get_issue_priorities pathpriorities, session
+    responsepriorities = Redmine::Issues.new.get_issue_priorities pathpriorities, session
     if responsepriorities
       @priorities =  cleanhash ( responsepriorities['issue_priorities'])
     end
 
     pathtracker = @config['config']['url']  + 'projects/' + params[:id] + '.json?include=trackers'
-    responsetrackers = RedmineIssues.new.get_issue_data pathtracker, session
+    responsetrackers = Redmine::Issues.new.get_issue_data pathtracker, session
     if responsetrackers
       @trackers = cleanhash ( responsetrackers['project']['trackers'])
     end
 
     pathstatus = @config['config']['url'] + 'issue_statuses.json'
-    responsestatus = RedmineIssues.new.get_issue_status pathstatus, session
+    responsestatus = Redmine::Issues.new.get_issue_status pathstatus, session
     if responsestatus
       @status = cleanhash ( responsestatus['issue_statuses'])
     end
 
     pathversions = @config['config']['url'] + 'projects/' + params[:id] + '/versions.json'
-    responseversions = RedmineIssues.new.get_project_versions pathversions, session
+    responseversions = Redmine::Issues.new.get_project_versions pathversions, session
 
     if responseversions
       @versions = cleanhash (responseversions)
@@ -63,7 +63,6 @@ class SmartRedmine < Sinatra::Base
     @project_id = params[:id]
 
     erb :'../views/issues'
-
   end
-
 end
+

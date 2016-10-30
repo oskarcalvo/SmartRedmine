@@ -1,6 +1,5 @@
 # encoding: utf-8
 class Issue
-
   attr_reader :issue_id
   attr_reader :key
 
@@ -43,8 +42,7 @@ end
 
   def get_issue_data
     path = @config['config']['url'] + 'issues/' + issue_id + '.json?include=journals&key=' + key
-    response = RedmineIssues.new.get_issues path
+    Redmine::Issues.new.get_issues path
   end
-
-
 end
+

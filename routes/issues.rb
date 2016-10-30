@@ -1,15 +1,12 @@
 # encoding: utf-8
 class SmartRedmine < Sinatra::Base
-
-
   get '/issues/:id/journals' do
 
     require_logged_in
     #path = @config['config']['url'] + 'issues/' + params[:id] + '.json?include=journals&key=' + session[:user]['api_key']
     #response = RedmineIssues.new.get_issues path
     content_type :json
-    journals = Issue.new( params[:id],session[:user]['api_key'] ).get_journals
-
+    Issue.new( params[:id],session[:user]['api_key'] ).get_journals
   end
 
   put '/issues/:id' do
@@ -28,7 +25,7 @@ class SmartRedmine < Sinatra::Base
       pass: session[:loginpass],
     }
 
-    response = RedmineIssues.new.put_issue(path, args)
+    response = Redmine::Issues.new.put_issue(path, args)
 
     if response
       flash[:message_issue_updated] = "Issue #{params[:subjetc]} has been updated."
@@ -51,9 +48,7 @@ class SmartRedmine < Sinatra::Base
       pass: session[:loginpass],
     }
 
-    response = RedmineIssues.new.post_issue(path,args)
-
+    Redmine::Issues.new.post_issue(path,args)
   end
-
-
 end
+
