@@ -1,21 +1,9 @@
 $(document).ready(function () {
-
 	$(".saveissue").click(function () {
-
-		//console.log($(this));
-  	//var issue = $(this).attr("#data-issue");
   	var issue = $(this).attr('data-id');
 
   	console.log( issue );
-
-
-  	//alert("Handler for .click() called." + issue);
-
   });
-});
-
-$(document).ready(function () {
-
 
 	$('textarea').each(function() {
 		var simplemde = new SimpleMDE({
@@ -28,40 +16,22 @@ $(document).ready(function () {
    	simplemde.render();
 	})
 
-});
-
-
-$(document).ready(function(){
-
-	$('.issue_start_date').pickadate({
-		firstDay: 1,
-		formatSubmit: 'yyyy-mm-dd',
-		format: 'yyyy-mm-dd',
-	});
-	$('.issue_due_date').pickadate({
+  $('.issue_start_date').pickadate({
 		firstDay: 1,
 		formatSubmit: 'yyyy-mm-dd',
 		format: 'yyyy-mm-dd',
 	});
 
-});
+  $('.issue_due_date').pickadate({
+		firstDay: 1,
+		formatSubmit: 'yyyy-mm-dd',
+		format: 'yyyy-mm-dd',
+	});
 
-$(document).ready(function() {
 	$('select').material_select();
-});
 
+  $(".button-collapse").sideNav();
 
-	$(document).ready(function(){
-
-		// Initialize collapse button
-	  $(".button-collapse").sideNav();
-	  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-	  //$('.collapsible').collapsible();
-
-	});
-
-
-$(document).ready(function(){
 	$(".comentario-link").click(function(){
 		var comentario_issue_id = $(this).attr('data-id');
 
@@ -91,21 +61,15 @@ $(document).ready(function(){
 			;
 		}
 
-
 		$(".comentario-block").hide( "slow" );
 		var comentario_id = 'comentario-' + comentario_issue_id;
 		$("#" + comentario_id).fadeToggle("slow", "linear");
-
 	});
 
-});
-
-$(document).ready(function(){
 	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 	$('.modal-trigger').leanModal({
 		starting_top: '5%', // Starting top style attribute
 		ending_top: '5%', // Ending top style attribute
-
-
 	});
 });
+
