@@ -11,7 +11,7 @@ class SmartRedmine < Sinatra::Base
 
   post '/loginvalidate' do
 
-    response = Redmine::User.new.get_user(params[:name],params[:password])
+    response = Redmine::User.get_user(params[:name],params[:password])
 
     if !response.nil?
       #guardamos los datos de user/pass y objeto de usuario de redmine en la sesión de sinatra

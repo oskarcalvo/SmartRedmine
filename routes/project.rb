@@ -58,7 +58,7 @@ class SmartRedmine < Sinatra::Base
       @versions = cleanhash (responseversions)
     end
 
-    projectlist = RedmineUser.new.get_projects(session[:user]['api_key'])
+    projectlist = Redmine::User.get_projects(session[:user]['api_key'])
 
     if projectlist
       @projectlist = projectlist
