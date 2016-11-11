@@ -1,4 +1,4 @@
-class SmartRedmine < Sinatra::Base
+class UserController < Sinatra::Base
 
   get '/user' do
     #validamos si el usuario se ha autentificado correctamente.
