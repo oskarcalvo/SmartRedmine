@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SmartRedmine < Sinatra::Base
 
   get '/user' do

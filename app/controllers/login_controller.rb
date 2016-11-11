@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SmartRedmine < Sinatra::Base
   get '/login' do
     erb :'loginform'
@@ -26,6 +27,11 @@ class SmartRedmine < Sinatra::Base
     else
       redirect '/login'
     end
+  end
+
+  get '/logout' do
+    session.clear
+    require_logged_in
   end
 
 end
