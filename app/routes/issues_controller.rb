@@ -1,5 +1,5 @@
 # encoding: utf-8
-class IssuesConroller < Sinatra::Base
+class IssuesController < Sinatra::Base
   get '/issues/:id/journals' do
 
     require_logged_in
