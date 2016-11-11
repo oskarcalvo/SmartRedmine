@@ -1,22 +1,14 @@
 $(document).ready(function () {
-
 	$(".saveissue").click(function () {
-
 		//console.log($(this));
   	//var issue = $(this).attr("#data-issue");
   	var issue = $(this).attr('data-id');
-
   	console.log( issue );
-
-
   	//alert("Handler for .click() called." + issue);
-
   });
 });
 
 $(document).ready(function () {
-
-
 	$('textarea').each(function() {
 		var simplemde = new SimpleMDE({
 			autofocus: true,
@@ -27,12 +19,10 @@ $(document).ready(function () {
 		});
    	simplemde.render();
 	})
-
 });
 
 
 $(document).ready(function(){
-
 	$('.issue_start_date').pickadate({
 		firstDay: 1,
 		formatSubmit: 'yyyy-mm-dd',
@@ -43,7 +33,6 @@ $(document).ready(function(){
 		formatSubmit: 'yyyy-mm-dd',
 		format: 'yyyy-mm-dd',
 	});
-
 });
 
 $(document).ready(function() {
@@ -52,12 +41,10 @@ $(document).ready(function() {
 
 
 	$(document).ready(function(){
-
 		// Initialize collapse button
 	  $(".button-collapse").sideNav();
 	  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 	  //$('.collapsible').collapsible();
-
 	});
 
 
@@ -88,16 +75,12 @@ $(document).ready(function(){
 			})
 			.fail(function(data){
 			});
-
-			;
 		}
 
 		var comentario_id = 'comentario-' + comentario_issue_id;
 		$(".comentario-block").not("#" + comentario_id).hide( "slow" );
 		$("#" + comentario_id).fadeToggle("slow", "linear");
-
 	});
-
 });
 
 $(document).ready(function(){
@@ -105,7 +88,5 @@ $(document).ready(function(){
 	$('.modal-trigger').leanModal({
 		starting_top: '5%', // Starting top style attribute
 		ending_top: '5%', // Ending top style attribute
-
-
 	});
 });
