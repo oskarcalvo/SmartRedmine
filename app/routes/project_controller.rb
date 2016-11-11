@@ -1,5 +1,5 @@
 # encoding: utf-8
-class SmartRedmine < Sinatra::Base
+class ProjectController < Sinatra::Base
   get '/projects/:id' do
     #validamos si el usuario se ha autentificado correctamente.
     require_logged_in
