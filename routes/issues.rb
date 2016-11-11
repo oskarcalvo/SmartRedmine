@@ -18,14 +18,14 @@ class SmartRedmine < Sinatra::Base
     params.delete("splat")
     params.delete("actualizar")
 
-    path = @config['config']['url'] + 'issues/' + params[:id] + '.json'
+    path =  'issues/' + params[:id] + '.json'
     args = {
       issue:  params,
       user: session[:loginname],
       pass: session[:loginpass],
     }
 
-    response = Redmine::Issues.new.put_issue(path, args)
+    response = Redmine::Issues.put_issue(path, args)
 
     if response
       flash[:message_issue_updated] = "Issue #{params[:subjetc]} has been updated."
@@ -41,14 +41,13 @@ class SmartRedmine < Sinatra::Base
     # puts params
     #{"project_id"=>"9", "tracker_id"=>"3", "status_id"=>"1", "priority_id"=>"1", "assigned_to_id"=>"6", "estimated_hours"=>"5.33", "subject"=>"dfdsfsafsdafda", "description"=>"fdsafsafsafdsadffds", "actualizar"=>"Actualizar"}
 
-    path = @config['config']['url'] + 'issues.json'
+    path = 'issues.json'
     args = {
       issue: params,
       user: session[:loginname],
       pass: session[:loginpass],
     }
 
-    Redmine::Issues.new.post_issue(path,args)
+    Redmine::Issues.post_issue(path,args)
   end
 end
-

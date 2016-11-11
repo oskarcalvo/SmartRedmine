@@ -3,14 +3,10 @@ module Redmine
     USEROBJECT = 'users/current.json'
     USERPROJECTS = 'users/current.json?include=memberships'
 
-    def initialize()
-      @config = YAML.load_file( SmartRedmine::ROOT + "/conf/config.yaml")
-    end
-
     def get_user (user, pass)
-      path = @config["config"]["url"] + USEROBJECT
+      path =  USEROBJECT
 
-      response = Redmine::Connect2API.new.connect(path, {user: user, pass: pass })
+      response = Redmine::Connect2API.get(path, {user: user, pass: pass })
 
       #data = nil
 
@@ -25,9 +21,9 @@ module Redmine
     end
 
     def get_projects (apikey)
-      path = @config['config']['url'] + USERPROJECTS + '&key=' + apikey
+      path = USERPROJECTS + '&key=' + apikey
 
-      response = Redmine::Connect2API.new.connect(path)
+      response = Redmine::Connect2API.get(path)
 
       #projects = nil
 
@@ -42,4 +38,3 @@ module Redmine
     end
   end
 end
-

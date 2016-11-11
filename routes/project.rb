@@ -13,8 +13,8 @@ class SmartRedmine < Sinatra::Base
       @message = flash[:message_issue_updated]
     end
 
-    path = @config['config']['url'] + 'issues.json?project_id=' + params[:id] + '&key=' + session[:user]['api_key']
-    response = Redmine::Issues.new.get_issues path
+    path = 'issues.json?project_id=' + params[:id] + '&key=' + session[:user]['api_key']
+    response = Redmine::Issues.get_issues path
 
     if response && response['total_count'] == 0
 
@@ -27,42 +27,41 @@ class SmartRedmine < Sinatra::Base
       @issues = response['issues']
     end
 
-    pathmembers = @config['config']['url'] + 'projects/' + params[:id] + '/memberships.json'
-    responsemembers = Redmine::Issues.new.get_project_users pathmembers,session
+    pathmembers = 'projects/' + params[:id] + '/memberships.json'
+    responsemembers = Redmine::Issues.get_project_users pathmembers,session
     if !responsemembers.nil?
       @members = responsemembers['memberships'].inject({}) {|sum, elem| sum[elem['user']['id']] = elem['user']['name']; sum}
     end
 
-    pathpriorities = @config['config']['url'] + 'enumerations/issue_priorities.json'
-    responsepriorities = Redmine::Issues.new.get_issue_priorities pathpriorities, session
+    pathpriorities = 'enumerations/issue_priorities.json'
+    responsepriorities = Redmine::Issues.get_issue_priorities pathpriorities, session
     if responsepriorities
       @priorities =  cleanhash ( responsepriorities['issue_priorities'])
     end
 
-    pathtracker = @config['config']['url']  + 'projects/' + params[:id] + '.json?include=trackers'
-    responsetrackers = Redmine::Issues.new.get_issue_data pathtracker, session
+    pathtracker = 'projects/' + params[:id] + '.json?include=trackers'
+    responsetrackers = Redmine::Issues.get_issue_data pathtracker, session
     if responsetrackers
       @trackers = cleanhash ( responsetrackers['project']['trackers'])
     end
 
-    pathstatus = @config['config']['url'] + 'issue_statuses.json'
-    responsestatus = Redmine::Issues.new.get_issue_status pathstatus, session
+    pathstatus = 'issue_statuses.json'
+    responsestatus = Redmine::Issues.get_issue_status pathstatus, session
     if responsestatus
       @status = cleanhash ( responsestatus['issue_statuses'])
     end
 
-    pathversions = @config['config']['url'] + 'projects/' + params[:id] + '/versions.json'
-    responseversions = Redmine::Issues.new.get_project_versions pathversions, session
+    pathversions = 'projects/' + params[:id] + '/versions.json'
+    responseversions = Redmine::Issues.get_project_versions pathversions, session
 
     if responseversions
       @versions = cleanhash (responseversions)
     end
 
 
-    @path = @config['config']['url']
+    @path = Redmine::Connect2API.redmine_uri
     @project_id = params[:id]
 
     erb :'../views/issues'
   end
 end
-

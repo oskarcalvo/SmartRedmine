@@ -4,7 +4,6 @@ class Issue
   attr_reader :key
 
   def initialize (issue_id, key)
-    @config = YAML.load_file("./conf/config.yaml")
     @issue_id = issue_id
     @key = key
 end
@@ -41,8 +40,7 @@ end
   end
 
   def get_issue_data
-    path = @config['config']['url'] + 'issues/' + issue_id + '.json?include=journals&key=' + key
-    Redmine::Issues.new.get_issues path
+    path = 'issues/' + issue_id + '.json?include=journals&key=' + key
+    Redmine::Issues.get_issues path
   end
 end
-
