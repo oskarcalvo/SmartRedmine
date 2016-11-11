@@ -16,6 +16,6 @@ class SmartRedmine < Sinatra::Base
       redirect '/login'
     end
 
-    erb  :'../app/views/user'
+    erb  :'user'
   end
 end

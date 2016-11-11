@@ -60,7 +60,7 @@ module Redmine
       private
 
       def redmine_url
-        YAML.load_file( SmartRedmine::ROOT + "/conf/config.yaml" )['config']['url']
+        YAML.load_file( SmartRedmine::ROOT + "/app/conf/config.yaml" )['config']['url']
       end
     end
   end

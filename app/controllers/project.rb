@@ -62,6 +62,6 @@ class SmartRedmine < Sinatra::Base
     @path = Redmine::Connect2API.redmine_uri
     @project_id = params[:id]
 
-    erb :'../app/views/issues'
+    erb :'issues'
   end
 end

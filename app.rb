@@ -38,6 +38,8 @@ class SmartRedmine < Sinatra::Base
     register Sinatra::Flash
     set :static_cache_control, [:public, max_age: 60 * 60 * 24 * 365]
     enable :method_override
+    set :views, File.dirname(__FILE__) + '/app/views'
+    set :public_folder, File.dirname(__FILE__) + '/public'
 
       #register Sinatra::Handlebars
       #handlebars {
