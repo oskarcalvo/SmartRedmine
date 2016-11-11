@@ -76,4 +76,4 @@ class SmartRedmine < Sinatra::Base
 
 
 end
-require_relative 'app/routes/init'
+require_relative 'app/controllers/init'
