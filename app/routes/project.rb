@@ -19,7 +19,7 @@ class SmartRedmine < Sinatra::Base
     if response && response['total_count'] == 0
 
       @sin_incidencias = response['total_count']
-      erb :'../views/issues'
+      erb :'../app/views/issues'
     end
 
 
@@ -62,6 +62,6 @@ class SmartRedmine < Sinatra::Base
     @path = Redmine::Connect2API.redmine_uri
     @project_id = params[:id]
 
-    erb :'../views/issues'
+    erb :'../app/views/issues'
   end
 end

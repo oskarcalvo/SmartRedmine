@@ -15,9 +15,9 @@ require 'sinatra/flash'
 #require 'rack/csrf' # TODO: resolver esto, es importante tener un csrf por motivos de seguridad en los formularios.
 #require 'sinatra/handlebars'
 
-require_relative 'libs/redmine.rb'
-require_relative 'libs/issues.rb'
-require_relative 'helpers/init'
+require_relative 'app/libs/redmine.rb'
+require_relative 'app/libs/issues.rb'
+require_relative 'app/helpers/init'
 
 class SmartRedmine < Sinatra::Base
   helpers Sinatra::CleanHash
@@ -46,8 +46,8 @@ class SmartRedmine < Sinatra::Base
 
       register Sinatra::AssetPack
       assets do
-        serve '/images', :from => 'asset/img/'
-        serve '/js', :from => 'asset/js'
+        serve '/images', :from => 'public/asset/img/'
+        serve '/js', :from => 'public/asset/js'
         js :application, [
           '/js/jquery.js',
           '/js/foundation.min.js',
@@ -55,18 +55,13 @@ class SmartRedmine < Sinatra::Base
           '/js/vendor/pickadate/lib/compressed/legacy.js',
         ]
 
-        serve '/css', :from => 'asset/css'
+        serve '/css', :from => 'public/asset/css'
         css :application, [
           '/css/*.css',
           '/css/vendor/pickadate/*.css'
         ]
       end
 
-  end
-
-  before do
-    @config = ENV['Redmine_uri'] || "development"
-    YAML.load_file("conf/config.yaml")[@config]
   end
 
   def require_logged_in
@@ -79,4 +74,4 @@ class SmartRedmine < Sinatra::Base
 
 
 end
-require_relative 'routes/init'
+require_relative 'app/routes/init'

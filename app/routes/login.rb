@@ -1,6 +1,6 @@
 class SmartRedmine < Sinatra::Base
   get '/login' do
-    erb :'../views/loginform'
+    erb :'../app/views/loginform'
   end
 
   get '/loginvalidate' do
