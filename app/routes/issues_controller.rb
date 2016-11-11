@@ -1,5 +1,5 @@
 # encoding: utf-8
-class SmartRedmine < Sinatra::Base
+class IssuesConroller < Sinatra::Base
   get '/issues/:id/journals' do
 
     require_logged_in
