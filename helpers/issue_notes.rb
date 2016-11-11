@@ -6,8 +6,6 @@ module Sinatra
       newhash = Hash.new
         notes.each do | note |
           if !note.empty?
-            binding.pry
-
           end
         end
 
