@@ -1,17 +1,14 @@
-<div class="row" style="height: 50px;">
 
   <% if @sin_incidencias %>
     <%= erb(:_cero_incidencias) %>
   <% else %>
-    <%= erb(:_listado_issues, 
+    <%= erb(:_listado_issues,
             :locals =>{
               :issues => @issues,
               :trackers => @trackers,
               :priorities => @priorities,
-              :members => @members,  
-              :status => @status,    
+              :members => @members,
+              :status => @status,
               :path => @path,
       }) %>
   <% end %>
-
-</div>

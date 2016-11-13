@@ -1,7 +1,4 @@
 # frozen_string_literal: true
-
-source "https://rubygems.org"
-
 gem 'sinatra',           '~> 1.4.7'
 gem 'sinatra-assetpack', '~> 0.3.5'
 gem 'sinatra-contrib',   '~> 1.4.7'
@@ -17,6 +14,8 @@ gem 'redcarpet',     '~> 3.3.4'
 gem 'faraday',       '~> 0.9.2'
 gem 'rack_csrf',     '~> 2.5'
 gem 'tux',           '~> 0.3.0'
+
+
 
 group :development do
   gem 'redmine-installer', '~> 1.0.7'

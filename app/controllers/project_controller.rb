@@ -58,6 +58,12 @@ class SmartRedmine < Sinatra::Base
       @versions = cleanhash (responseversions)
     end
 
+    projectlist = Redmine::User.get_projects(session[:user]['api_key'])
+
+    if projectlist
+      @projectlist = projectlist
+    end
+
 
     @path = Redmine::Connect2API.redmine_uri
     @project_id = params[:id]

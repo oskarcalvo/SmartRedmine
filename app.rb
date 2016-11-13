@@ -28,6 +28,7 @@ class SmartRedmine < Sinatra::Base
   helpers Sinatra::CsrfToken
   helpers Sinatra::IssueNotes
   helpers Sinatra::MarkdownHelper
+  helpers Sinatra::FieldSettingsOptionsList
 
   ROOT = File.dirname(__FILE__)
 
