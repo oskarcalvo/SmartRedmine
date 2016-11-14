@@ -1,3 +1,4 @@
 app/examples/*
 app/conf/config.yaml
+db/*.db
 
