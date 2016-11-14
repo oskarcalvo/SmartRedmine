@@ -1,21 +1,4 @@
-require_relative 'cleanhash.rb'
-#helpers Sinatra::CleanHash
-
-require_relative 'ahah.rb'
-#helpers Sinatra::Ahah
-
-require_relative 'change_date.rb'
-#helpers Sinatra::ChangeDate
-
-require_relative 'rack_csrf.rb'
-#helpers Sinatra::CsrfTag
-#helpers Sinatra::CsrfToken
-
-require_relative 'issue_notes'
-#helpers Sinatra::IssueNotes
-
-require_relative 'markdown'
-#helpers Sinatra::MarkdownHelper
-
-require_relative 'field_settings.rb'
-#helpers Sinatra::FieldSettingsHash
+# encoding: utf-8
+Dir[File.dirname(__FILE__) + '/*.rb'].each do |file|
+    require file
+end
