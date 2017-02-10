@@ -6,16 +6,17 @@ gem 'sinatra-settings',  '~> 0.1.2'
 gem 'sinatra-logger',    '~> 0.3.1'
 gem 'sinatra-js',        '~> 0.1.5'
 gem 'sinatra-flash',     '~> 0.3.0'
+gem 'sinatra-sequel',    '~> 0.9.0'
+gem 'sequel_pg',         '~> 1.6', '>= 1.6.17'
+gem 'pry',            '~> 0.10.4'
+gem 'awesome_print',  '~> 1.7.0'
 
-gem 'pry',           '~> 0.10.4'
-gem 'awesome_print', '~> 1.7.0'
-
-gem 'redcarpet',     '~> 3.3.4'
-gem 'faraday',       '~> 0.9.2'
-gem 'rack_csrf',     '~> 2.5'
-gem 'tux',           '~> 0.3.0'
-
-
+gem 'redcarpet',      '~> 3.3.4'
+gem 'faraday',        '~> 0.9.2'
+gem 'rack_csrf',      '~> 2.5'
+gem 'tux',            '~> 0.3.0'
+gem 'pg_json',        '~> 0.1.29'
+gem 'pg',             '~> 0.19.0'
 
 group :development do
   gem 'redmine-installer', '~> 1.0.7'

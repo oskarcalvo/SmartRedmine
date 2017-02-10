@@ -1,23 +1,31 @@
 require 'sinatra'
+#require 'sinatra/contrib'
+require 'sinatra/assetpack'
+require 'sinatra/settings'
+require 'sinatra/logger'
+require 'sinatra/js'
+require 'sinatra/cookies'
+require 'sinatra/flash'
+require 'sequel'
+require 'sinatra/sequel'
+#require 'sequel_pg'
+require 'pg'
+#require 'pg_json'
+require 'redcarpet'
+require 'rerun'
 require 'net/http'
 require 'uri'
 require 'yaml'
 require 'pry'
 require 'json'
-require 'sinatra/assetpack'
-require 'sinatra/settings'
-require 'sinatra/logger'
-require 'sinatra/js'
-require 'redcarpet'
-require 'rerun'
-require 'sinatra/cookies'
-require 'sinatra/flash'
 #require 'rack/csrf' # TODO: resolver esto, es importante tener un csrf por motivos de seguridad en los formularios.
 #require 'sinatra/handlebars'
 
 require_relative 'app/libs/redmine.rb'
 require_relative 'app/libs/issues.rb'
+require_relative 'app/libs/ddbb_connection'
 require_relative 'app/helpers/init'
+
 
 class SmartRedmine < Sinatra::Base
   helpers Sinatra::CleanHash
@@ -33,6 +41,9 @@ class SmartRedmine < Sinatra::Base
   ROOT = File.dirname(__FILE__)
 
   configure do
+
+    DB = Sequel.connect(ENV["DATABASE_URL"] || DDBBConnection.connectString)
+
     set :ROOT, File.dirname(__FILE__)
     set :bind, '0.0.0.0'
     enable :sessions
@@ -74,7 +85,7 @@ class SmartRedmine < Sinatra::Base
   def is_not_authenticated?
     return session[:user].nil?
   end
-
-
 end
+
+require_relative 'app/models/init'
 require_relative 'app/controllers/init'

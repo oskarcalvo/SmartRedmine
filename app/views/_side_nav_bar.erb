@@ -6,9 +6,9 @@
           <a class="collapsible-header">List of Projects<i class="material-icons right">arrow_drop_down</i> <i class="material-icons"> view_list</i></a>
           <div class="collapsible-body">
             <ul>
-              <% for @project in @projectlist  %>
+              <% projectlist.each do |project|  %>
                 <li>
-                  <a href="/projects/<%= @project['project']['id'] %>"> <%= @project['project']['name'] %></a>
+                  <a href="/projects/<%= project['project']['id'] %>"> <%= project['project']['name'] %></a>
                 </li>
               <% end %>
             </ul>

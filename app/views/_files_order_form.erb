@@ -1,5 +1,5 @@
 <div class="row" style="padding-left:15px">
-  <form id="field_settings" class="field_settings_form" action="/update_settings">
+  <form id="field_settings" class="field_settings_form" action="/configuration/safe_settings" method="POST">
     <ul id="sortable">
       <% field_settings_options_list.each do |key,name| %>
         <li class="ui-state-default">
@@ -11,6 +11,6 @@
         </li>
       <%end %>
     </ul>
-    <button type="submit" name="guardar" class="btn waves-effect waves-light" value="guardar">Guardar</button
+    <button type="submit" name="guardar" class="btn" value="Guardar">Guardar</button>
   </form>
 </div>
