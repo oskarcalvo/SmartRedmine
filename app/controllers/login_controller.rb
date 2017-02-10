@@ -23,7 +23,7 @@ class SmartRedmine < Sinatra::Base
       if cookies['project_id']
         redirect '/projects/' + cookies[:project_id]
       end
-      redirect :'../views/_user'
+      redirect '/user'
     else
       redirect '/login'
     end

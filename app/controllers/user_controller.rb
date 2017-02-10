@@ -9,10 +9,9 @@ class SmartRedmine < Sinatra::Base
       redirect '/projects/' + cookies[:project_id]
     end
 
-    response = Redmine::User.new.get_projects(session[:user]['api_key'])
-
+    response = Redmine::User.get_projects(session[:user]['api_key'])
     if !response.nil?
-      @projects = response
+      @projectlist = response
     else
       redirect '/login'
     end

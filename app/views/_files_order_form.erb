@@ -1,0 +1,16 @@
+<div class="row" style="padding-left:15px">
+  <form id="field_settings" class="field_settings_form" action="/configuration/safe_settings" method="POST">
+    <ul id="sortable">
+      <% field_settings_options_list.each do |key,name| %>
+        <li class="ui-state-default">
+          <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+          <div class="col s10">
+            <input id="settings_for_<%=key%>" type="checkbox" name="<%= key %>" value="<%= name %>" >
+            <label for="settings_for_<%=key%>"><%=name%>:</label>
+          </div>
+        </li>
+      <%end %>
+    </ul>
+    <button type="submit" name="guardar" class="btn" value="Guardar">Guardar</button>
+  </form>
+</div>

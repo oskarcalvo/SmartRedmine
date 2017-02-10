@@ -4,4 +4,11 @@ class SmartRedmine < Sinatra::Base
     redirect '/login'
   end
 
+  get '/db' do
+#     db_connection = Sequel.connect('sqlite://test.db')
+#     first_item  = db_connection[:configuration].first
+# content_type  :json
+# first_item.to_json
+  end
+
 end

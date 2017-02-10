@@ -1,10 +1,12 @@
   <div class="row">
-
     <div class="large-centered columns">
-
 			<ul>
-			  <% for @project in @projects  %>
-			    <li><a href="/projects/<%= @project['project']['id'] %>"> <%= @project['project']['name'] %></a> </li>
+			  <% @projectlist.each do |project|  %>
+			    <li>
+            <a href="/projects/<%= project['project']['id'] %>">
+              <%= project['project']['name'] %>
+            </a>
+          </li>
 			  <% end %>
 			</ul>
 		</div>
